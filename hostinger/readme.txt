@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.9.9
+Stable tag: 2.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -235,3 +235,6 @@ Watching for Changes: During development, you can use "npm run watch" to continu
 
 1.9.9 (2023-12-18)
 - Fixed assets load on subfolder installations
+
+2.0.0 (2024-01-10)
+- Increased minimal WordPress version
