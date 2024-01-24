@@ -58,6 +58,24 @@ import './videos'
 			window.open( 'https://support.hostinger.com/en/?q=WordPress', '_blank' );
 		} );
 
+        $('body').on('click', '.hst-open-affiliate-tab', function(e) {
+            e.preventDefault();
+
+            $( 'li.hsr-list__item[data-name="amazon_affiliate"]' ).trigger( 'click' );
+        } );
+
+        $('body').on('click', '#hst-connect_affiliate_settings', function(e) {
+            e.preventDefault();
+
+            $( 'li.hsr-list__item[data-name="amazon_affiliate"]' ).trigger( 'click' );
+
+            document.dispatchEvent(
+                new CustomEvent('scrollToAffiliateSettings', {
+                    bubbles: true
+                })
+            );
+        } );
+
 		document.querySelectorAll( '.hsr-playlist-item' ).forEach( function ( item ) {
 			const firstItem = document.querySelector( '.hsr-playlist-item:first-child' );
 			firstItem.classList.add( 'hsr-active-video' );

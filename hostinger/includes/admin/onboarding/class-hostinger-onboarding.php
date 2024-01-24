@@ -41,6 +41,12 @@ class Hostinger_Onboarding {
 		$steps[] = new Hostinger_Onboarding_Image_Step();
 		$steps[] = new Hostinger_Onboarding_Heading();
 		$steps[] = new Hostinger_Onboarding_Add_Page();
+
+		if ( Hostinger_Helper::is_plugin_active( 'hostinger-affiliate-plugin' ) ) {
+			require_once $path . 'class-hostinger-onboarding-connect-affiliate-settings.php';
+			$steps[] = new Hostinger_Onboarding_Connect_Affiliate_Settings();
+		}
+
 		$steps[] = new Hostinger_Onboarding_Connect_Domain_Step();
 
 		return $steps;

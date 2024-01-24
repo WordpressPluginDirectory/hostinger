@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -238,3 +238,6 @@ Watching for Changes: During development, you can use "npm run watch" to continu
 
 2.0.0 (2024-01-10)
 - Increased minimal WordPress version
+
+2.0.1 (2024-01-16)
+- Added onboarding step for affiliate plugin

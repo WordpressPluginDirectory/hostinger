@@ -1,15 +1,15 @@
-# Copyright (C) 2023 Hostinger
+# Copyright (C) 2024 Hostinger
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hostinger 1.9.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hostinger-wordpress-plugin\n"
+"Project-Id-Version: Hostinger 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hostinger\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-17T07:34:46+00:00\n"
+"POT-Creation-Date: 2024-01-16T12:49:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: hostinger\n"
@@ -33,61 +33,51 @@ msgstr ""
 msgid "https://www.hostinger.com"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-ajax.php:84
-#: includes/admin/onboarding/class-hostinger-onboarding.php:62
+#: includes/admin/class-hostinger-admin-ajax.php:44
+#: includes/admin/onboarding/class-hostinger-onboarding.php:68
 msgid "Website is published"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-ajax.php:85
+#: includes/admin/class-hostinger-admin-ajax.php:45
 msgid "Congratulations! Your website is online."
-msgstr ""
-
-#: includes/admin/class-hostinger-admin-ajax.php:112
-msgid "invalid data"
 msgstr ""
 
 #: includes/admin/class-hostinger-admin-menu.php:26
 #: includes/admin/class-hostinger-admin-menu.php:27
-#: includes/admin/views/hostinger-onboarding-view.php:61
+#: includes/admin/views/hostinger-onboarding-view.php:64
 msgid "Get started"
 msgstr ""
 
 #: includes/admin/class-hostinger-admin-menu.php:36
 #: includes/admin/class-hostinger-admin-menu.php:37
-#: includes/admin/views/hostinger-onboarding-view.php:62
+#: includes/admin/views/hostinger-onboarding-view.php:65
 msgid "Learn"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-menu.php:46
 #: includes/admin/class-hostinger-admin-menu.php:47
-#: includes/admin/views/hostinger-onboarding-view.php:68
-msgid "AI assistant"
+#: includes/admin/class-hostinger-admin-menu.php:48
+#: includes/admin/views/hostinger-onboarding-view.php:71
+msgid "AI Content Creator"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-menu.php:57
-#: includes/admin/class-hostinger-admin-menu.php:58
-#: includes/admin/views/hostinger-onboarding-view.php:75
-msgid "Regenerate website with AI"
-msgstr ""
-
-#: includes/admin/onboarding/class-hostinger-onboarding.php:63
+#: includes/admin/onboarding/class-hostinger-onboarding.php:69
 msgid "You can access this guide material any time when updating your website"
 msgstr ""
 
-#: includes/admin/onboarding/class-hostinger-onboarding.php:65
+#: includes/admin/onboarding/class-hostinger-onboarding.php:71
 msgid "Preview website"
 msgstr ""
 
-#: includes/admin/onboarding/class-hostinger-onboarding.php:73
+#: includes/admin/onboarding/class-hostinger-onboarding.php:79
 msgid "Set up your website"
 msgstr ""
 
-#: includes/admin/onboarding/class-hostinger-onboarding.php:74
+#: includes/admin/onboarding/class-hostinger-onboarding.php:80
 msgid "Follow our guided checklist to setup your website"
 msgstr ""
 
-#: includes/admin/onboarding/class-hostinger-onboarding.php:75
-#: includes/admin/onboarding/class-hostinger-onboarding.php:77
+#: includes/admin/onboarding/class-hostinger-onboarding.php:81
+#: includes/admin/onboarding/class-hostinger-onboarding.php:83
 msgid "Publish website"
 msgstr ""
 
@@ -246,6 +236,41 @@ msgstr ""
 msgid "Once fields are filled, and your item has an image, description, and price, it’s time to publish it online. You will find the “publish” button at the top of the page, near the description field."
 msgstr ""
 
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:8
+msgid "Connect Amazon partnership account"
+msgstr ""
+
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:14
+msgid "Login to the Amazon Product Advertising dashboard"
+msgstr ""
+
+#. translators: %s: link to dashboard
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:16
+msgid "To gather the necessary information, log in to your <a href=\"%s\" target=\"_blank\" rel=\"noopener\">Amazon Product Advertising dashboard</a> using your personal Amazon partnership account."
+msgstr ""
+
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:19
+msgid "Open the Amazon Affiliate plugin configuration"
+msgstr ""
+
+#. translators: %s: link to plugin page
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:21
+msgid "Fill in the required details on the <a href=\"%s\" class=\"hst-open-affiliate-tab\">Amazon Affiliate plugin page</a>, where you'll find all the necessary information about the plugin."
+msgstr ""
+
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:24
+msgid "Copy-Paste the necessary information:"
+msgstr ""
+
+#. translators: %s: link to dashboard
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:26
+msgid "Complete the form with required information related to Amazon's partnership API. Retrieve all this information from the <a href=\"%s\" target=\"_blank\" rel=\"noopener\">Amazon Product Advertising dashboard</a> and paste it into the form."
+msgstr ""
+
+#: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-affiliate-settings.php:40
+msgid "Connect Amazon Account"
+msgstr ""
+
 #: includes/admin/onboarding/steps/class-hostinger-onboarding-connect-domain.php:9
 msgid "Connect your domain"
 msgstr ""
@@ -390,7 +415,7 @@ msgid "Create a logo"
 msgstr ""
 
 #: includes/admin/onboarding/steps/class-hostinger-onboarding-logo-step.php:12
-msgid "Adding a logo is a great way to personalize a website or add branding information. You can use your existing logo or create a new one using the <a href=\"https://logo.hostinger.com/?ref=wordpress-onboarding\" target=\"_blank\">Ai Logo Maker</a>."
+msgid "Adding a logo is a great way to personalize a website or add branding information. You can use your existing logo or create a new one using the <a href=\"https://logo.hostinger.com/?ref=wordpress-onboarding\" target=\"_blank\">AI Logo Maker</a>."
 msgstr ""
 
 #: includes/admin/onboarding/steps/class-hostinger-onboarding-logo-step.php:16
@@ -402,7 +427,7 @@ msgid "In the left sidebar, click Site Identity, then click on the Select Site I
 msgstr ""
 
 #: includes/admin/views/hostinger-onboarding-view.php:18
-#: includes/admin/views/hostinger-onboarding-view.php:227
+#: includes/admin/views/hostinger-onboarding-view.php:242
 msgid "How to Add Your WordPress Website to Google Search Console"
 msgstr ""
 
@@ -434,70 +459,44 @@ msgstr ""
 msgid "How to Set Up WordPress SMTP"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:119
+#: includes/admin/views/hostinger-onboarding-view.php:134
 msgid "Got it!"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:186
+#: includes/admin/views/hostinger-onboarding-view.php:201
 msgid "Publishing website"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:187
+#: includes/admin/views/hostinger-onboarding-view.php:202
 msgid "This can take some time"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:189
+#: includes/admin/views/hostinger-onboarding-view.php:204
 msgid "Close"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:199
+#: includes/admin/views/hostinger-onboarding-view.php:214
 msgid "WordPress tutorials"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:206
+#: includes/admin/views/hostinger-onboarding-view.php:221
 msgid "Hostinger Academy"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:268
+#: includes/admin/views/hostinger-onboarding-view.php:283
 msgid "Knowledge Base"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:269
+#: includes/admin/views/hostinger-onboarding-view.php:284
 msgid "Find the answers you need in our Knowledge Base"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:279
+#: includes/admin/views/hostinger-onboarding-view.php:294
 msgid "Help Center"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:280
+#: includes/admin/views/hostinger-onboarding-view.php:295
 msgid "Get in touch with our live specialists"
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:298
-msgid "AI Website Regeneration"
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:302
-msgid "We're developing an upcoming WordPress plugin feature that will enable website regeneration using our advanced AI tools. In the near future, you'll have the option to refresh your website with this innovative functionality. Stay informed about our latest developments as we work on this addition."
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:304
-msgid "Notify Me"
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:305
-msgid "Success! You will be notified when the new feature is available."
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:315
-#: includes/surveys/class-hostinger-surveys.php:345
-msgid "Question"
-msgstr ""
-
-#: includes/admin/views/hostinger-onboarding-view.php:315
-#: includes/surveys/class-hostinger-surveys.php:346
-msgid "of "
 msgstr ""
 
 #: includes/class-hostinger-errors.php:10
@@ -514,59 +513,6 @@ msgstr ""
 
 #: includes/class-hostinger-errors.php:27
 msgid "Unknown error code."
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys-questions.php:13
-msgid "How would you rate your experience using our AI Assistant plugin for content generation? (Scale 1-10)"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys-questions.php:14
-msgid "How would you rate your experience setting up a WooCommerce site on our hosting? (Scale 1-10)"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys-questions.php:15
-msgid "How would you rate your experience using our AI content generation tools in onboarding? (Scale 1-10)"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys-questions.php:19
-#: includes/surveys/class-hostinger-surveys-questions.php:21
-msgid "Do you have any comments/suggestions to improve our AI tools?"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys-questions.php:20
-msgid "Do you have any comments/suggestions to improve our WooCommerce onboarding process?"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:196
-msgid "Survey completed"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:265
-msgid "Next"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:266
-msgid "Previous"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:267
-msgid "Submit"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:268
-msgid "Thank you for completing the survey !"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:292
-msgid "Response required."
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:305
-msgid "Poor"
-msgstr ""
-
-#: includes/surveys/class-hostinger-surveys.php:306
-msgid "Excellent"
 msgstr ""
 
 #: includes/views/hostinger-coming-soon.php:6
