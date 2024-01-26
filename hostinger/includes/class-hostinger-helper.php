@@ -3,7 +3,6 @@
 class Hostinger_Helper {
 	public const HOSTINGER_FREE_SUBDOMAIN_URL = 'hostingersite.com';
 	public const HOSTINGER_PAGE = '/wp-admin/admin.php?page=hostinger';
-	public const CLIENT_WOO_COMPLETED_ACTIONS = 'woocommerce_task_list_tracked_completed_tasks';
 
 	/**
 	 *
@@ -110,34 +109,6 @@ class Hostinger_Helper {
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
 			error_log( print_r( $message, true ) );
 		}
-	}
-
-	public function default_woocommerce_survey_steps_completed( array $steps ): bool {
-		$completed_actions          = get_option( self::CLIENT_WOO_COMPLETED_ACTIONS, array() );
-		return empty( array_diff( $steps, $completed_actions ) );
-	}
-
-	public function is_this_page( string $page ): bool {
-
-		if( ! isset( $_SERVER['REQUEST_URI'] ) ) {
-			return false;
-		}
-
-		$current_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] );
-
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return false;
-		}
-
-		if ( isset( $current_uri ) && strpos( $current_uri, '/wp-json/' ) !== false ) {
-			return false;
-		}
-
-		if ( strpos( $current_uri, $page ) !== false ) {
-			return true;
-		}
-
-		return false;
 	}
 }
 

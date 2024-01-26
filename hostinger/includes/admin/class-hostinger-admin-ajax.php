@@ -13,28 +13,11 @@ class Hostinger_Admin_Ajax {
 			'publish_website',
 			'identify_action',
 			'menu_action',
-			'woocommerce_setup_store',
 		];
 
 		foreach ( $events as $event ) {
 			add_action( 'wp_ajax_hostinger_' . $event, [ __CLASS__, $event ] );
 		}
-	}
-
-	public static function woocommerce_setup_store(): void {
-		$nonce        = sanitize_text_field( $_POST['nonce'] );
-		$event_action = sanitize_text_field( $_POST['event_action'] );
-
-		$security_check = self::request_security_check( $nonce );
-
-		if ( ! empty( $security_check ) ) {
-			wp_send_json_error( $security_check );
-		}
-
-		$amplitude = new Hostinger_Amplitude();
-		$amplitude->setup_store( $event_action );
-
-		wp_send_json_success( [] );
 	}
 
 	public static function publish_website(): void {
