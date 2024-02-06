@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hostinger 2.0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hostinger\n"
+"Project-Id-Version: Hostinger 2.0.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hostinger-wordpress-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-16T12:49:25+00:00\n"
+"POT-Creation-Date: 2024-02-06T05:34:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: hostinger\n"
@@ -33,30 +33,30 @@ msgstr ""
 msgid "https://www.hostinger.com"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-ajax.php:44
+#: includes/admin/class-hostinger-admin-ajax.php:80
 #: includes/admin/onboarding/class-hostinger-onboarding.php:68
 msgid "Website is published"
 msgstr ""
 
-#: includes/admin/class-hostinger-admin-ajax.php:45
+#: includes/admin/class-hostinger-admin-ajax.php:81
 msgid "Congratulations! Your website is online."
 msgstr ""
 
 #: includes/admin/class-hostinger-admin-menu.php:26
 #: includes/admin/class-hostinger-admin-menu.php:27
-#: includes/admin/views/hostinger-onboarding-view.php:64
+#: includes/admin/views/hostinger-onboarding-view.php:92
 msgid "Get started"
 msgstr ""
 
 #: includes/admin/class-hostinger-admin-menu.php:36
 #: includes/admin/class-hostinger-admin-menu.php:37
-#: includes/admin/views/hostinger-onboarding-view.php:65
+#: includes/admin/views/hostinger-onboarding-view.php:93
 msgid "Learn"
 msgstr ""
 
 #: includes/admin/class-hostinger-admin-menu.php:47
 #: includes/admin/class-hostinger-admin-menu.php:48
-#: includes/admin/views/hostinger-onboarding-view.php:71
+#: includes/admin/views/hostinger-onboarding-view.php:100
 msgid "AI Content Creator"
 msgstr ""
 
@@ -426,77 +426,104 @@ msgstr ""
 msgid "In the left sidebar, click Site Identity, then click on the Select Site Icon button. Here, you can upload your brand logo. "
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:18
-#: includes/admin/views/hostinger-onboarding-view.php:242
+#: includes/admin/views/hostinger-onboarding-view.php:20
+#: includes/admin/views/hostinger-onboarding-view.php:281
 msgid "How to Add Your WordPress Website to Google Search Console"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:23
+#: includes/admin/views/hostinger-onboarding-view.php:25
 msgid "How to Create a WordPress Contact Us Page"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:28
+#: includes/admin/views/hostinger-onboarding-view.php:30
 msgid "How to Clear Cache in WordPress Website"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:33
+#: includes/admin/views/hostinger-onboarding-view.php:35
 msgid "How to Edit the Footer in WordPress"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:38
+#: includes/admin/views/hostinger-onboarding-view.php:40
 msgid "LiteSpeed Cache: How to Get 100% WordPress Optimization"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:43
+#: includes/admin/views/hostinger-onboarding-view.php:45
 msgid "How to Back Up a WordPress Site"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:48
+#: includes/admin/views/hostinger-onboarding-view.php:50
 msgid "How to Import Images Into WordPress Website"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:53
+#: includes/admin/views/hostinger-onboarding-view.php:55
 msgid "How to Set Up WordPress SMTP"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:134
+#: includes/admin/views/hostinger-onboarding-view.php:127
+msgid "Go to hPanel"
+msgstr ""
+
+#: includes/admin/views/hostinger-onboarding-view.php:173
 msgid "Got it!"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:201
+#: includes/admin/views/hostinger-onboarding-view.php:240
 msgid "Publishing website"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:202
+#: includes/admin/views/hostinger-onboarding-view.php:241
 msgid "This can take some time"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:204
+#: includes/admin/views/hostinger-onboarding-view.php:243
 msgid "Close"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:214
+#: includes/admin/views/hostinger-onboarding-view.php:253
 msgid "WordPress tutorials"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:221
+#: includes/admin/views/hostinger-onboarding-view.php:260
 msgid "Hostinger Academy"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:283
+#: includes/admin/views/hostinger-onboarding-view.php:325
 msgid "Knowledge Base"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:284
+#: includes/admin/views/hostinger-onboarding-view.php:326
 msgid "Find the answers you need in our Knowledge Base"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:294
+#: includes/admin/views/hostinger-onboarding-view.php:336
 msgid "Help Center"
 msgstr ""
 
-#: includes/admin/views/hostinger-onboarding-view.php:295
+#: includes/admin/views/hostinger-onboarding-view.php:337
 msgid "Get in touch with our live specialists"
+msgstr ""
+
+#: includes/admin/views/partials/hostinger-promotional-banner.php:5
+msgid "Invite a Friend, Earn Up to $100"
+msgstr ""
+
+#: includes/admin/views/partials/hostinger-promotional-banner.php:6
+msgid "Share your referral link with friends and family and <b>receive 20% commission</b> for every successful referral."
+msgstr ""
+
+#: includes/admin/views/partials/hostinger-promotional-banner.php:11
+msgid "Start earning"
+msgstr ""
+
+#: includes/admin/views/partials/hostinger-rate-us.php:2
+msgid "Rate this plugin"
+msgstr ""
+
+#: includes/admin/views/partials/hostinger-rate-us.php:36
+msgid ""
+"on <a\n"
+"\t\t\t   href=\"https://wordpress.org/support/plugin/hostinger/reviews/#new-post\"\n"
+"\t\t\t   target=\"_blank\" rel=\"noopener noreferrer\">WordPress.org</a>"
 msgstr ""
 
 #: includes/class-hostinger-errors.php:10

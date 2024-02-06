@@ -55,6 +55,7 @@ class Hostinger_Bootstrap {
 
 	private function load_admin_dependencies(): void {
 		require_once HOSTINGER_ABSPATH . 'includes/admin/class-hostinger-admin-assets.php';
+		require_once HOSTINGER_ABSPATH . 'includes/admin/class-hostinger-admin-hooks.php';
 		require_once HOSTINGER_ABSPATH . 'includes/admin/class-hostinger-admin-menu.php';
 		require_once HOSTINGER_ABSPATH . 'includes/admin/class-hostinger-admin-ajax.php';
 		require_once HOSTINGER_ABSPATH . 'includes/admin/class-hostinger-admin-redirect.php';

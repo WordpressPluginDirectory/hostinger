@@ -3,6 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 
 class Hostinger_Admin_Ajax {
+	private const PROMOTIONAL_BANNER_TRANSIENT = 'hts_hide_promotional_banner_transient';
+	private const TWO_DAYS = 172800;
 	public function __construct() {
 		add_action( 'init', [ $this, 'define_ajax_events' ], 0 );
 	}
@@ -13,11 +15,45 @@ class Hostinger_Admin_Ajax {
 			'publish_website',
 			'identify_action',
 			'menu_action',
+			'woocommerce_setup_store',
+			'hide_promotional_banner',
 		];
 
 		foreach ( $events as $event ) {
 			add_action( 'wp_ajax_hostinger_' . $event, [ __CLASS__, $event ] );
 		}
+	}
+
+	public static function hide_promotional_banner(): void {
+		$nonce          = sanitize_text_field( $_POST['nonce'] );
+		$transient_key  = self::PROMOTIONAL_BANNER_TRANSIENT;
+		$security_check = self::request_security_check( $nonce );
+
+		if ( ! empty( $security_check ) ) {
+			wp_send_json_error( $security_check );
+		}
+
+		if ( false === get_transient( $transient_key ) ) {
+			set_transient( $transient_key, time(), self::TWO_DAYS );
+		}
+
+		wp_send_json_success( [] );
+	}
+
+	public static function woocommerce_setup_store(): void {
+		$nonce        = sanitize_text_field( $_POST['nonce'] );
+		$event_action = sanitize_text_field( $_POST['event_action'] );
+
+		$security_check = self::request_security_check( $nonce );
+
+		if ( ! empty( $security_check ) ) {
+			wp_send_json_error( $security_check );
+		}
+
+		$amplitude = new Hostinger_Amplitude();
+		$amplitude->setup_store( $event_action );
+
+		wp_send_json_success( [] );
 	}
 
 	public static function publish_website(): void {
