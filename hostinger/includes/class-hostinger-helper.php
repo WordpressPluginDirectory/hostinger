@@ -44,7 +44,6 @@ class Hostinger_Helper {
 		if ( file_exists( $token_file ) && ! empty( file_get_contents( $token_file ) ) ) {
 			$api_token = file_get_contents( $token_file );
 		}
-
 		return $api_token;
 	}
 
@@ -55,9 +54,8 @@ class Hostinger_Helper {
 	 * @since    1.7.0
 	 * @access   public
 	 */
-
 	public function get_host_info(): string {
-		$host     = $_SERVER['HTTP_HOST'] ?? '';
+		$host     = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( $_SERVER['HTTP_HOST'] ) : '';
 		$site_url = get_site_url();
 		$site_url = preg_replace( '#^https?://#', '', $site_url );
 
@@ -177,6 +175,26 @@ class Hostinger_Helper {
 		}
 
 		return self::HPANEL_DOMAIN_URL . $domain_url;
+	}
+
+	public function check_transient_eligibility( $transient_request_key, $cache_time = 3600 ): bool {
+		try {
+			// Set transient
+			set_transient( $transient_request_key, true, $cache_time );
+
+			// Check if transient was set successfully
+			if ( false === get_transient( $transient_request_key ) ) {
+				throw new Exception( 'Unable to create transient in WordPress.' );
+			}
+
+			// If everything is fine, return true
+			return true;
+
+		} catch ( Exception $exception ) {
+			// If there's an exception, log the error and return false
+			$this->helper->error_log( 'Error checking eligibility: ' . $exception->getMessage() );
+			return false;
+		}
 	}
 }
 

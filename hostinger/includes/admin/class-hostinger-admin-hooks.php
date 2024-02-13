@@ -3,7 +3,11 @@
 defined( 'ABSPATH' ) || exit;
 
 class Hostinger_Admin_Hooks {
+	private $settings;
+
 	public function __construct() {
+		$this->settings = new Hostinger_Settings();
+
 		add_action( 'admin_footer', array( $this, 'rate_plugin' ) );
 	}
 

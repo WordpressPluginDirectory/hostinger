@@ -17,6 +17,7 @@ class Hostinger_Amplitude {
 	private const WOO_ONBOARDING_STARTED_TRANSIENT_RESPONSE = 'woocommerce_started_response';
 	private const CACHE_SIX_HOURS = 3600 * 6;
 	private const CACHE_ONE_HOUR = 3600;
+	private const CACHE_ONE_DAY = 86400;
 
 	private Hostinger_Config $config_handler;
 	private Hostinger_Requests_Client $client;
@@ -27,10 +28,13 @@ class Hostinger_Amplitude {
 		$this->helper         = new Hostinger_Helper();
 		$this->config_handler = new Hostinger_Config();
 		$this->settings       = new Hostinger_Settings();
-		$this->client         = new Hostinger_Requests_Client( $this->config_handler->get_config_value( 'base_rest_uri', HOSTINGER_REST_URI ), array(
-			Hostinger_Config::TOKEN_HEADER  => $this->helper::get_api_token(),
-			Hostinger_Config::DOMAIN_HEADER => $this->helper->get_host_info()
-		) );
+		$this->client         = new Hostinger_Requests_Client(
+			$this->config_handler->get_config_value( 'base_rest_uri', HOSTINGER_REST_URI ),
+			array(
+				Hostinger_Config::TOKEN_HEADER  => $this->helper::get_api_token(),
+				Hostinger_Config::DOMAIN_HEADER => $this->helper->get_host_info(),
+			)
+		);
 
 		if ( $this->helper::is_plugin_active( 'woocommerce' ) ) {
 			$this->setup_woocommerce_onboarding_events();
@@ -54,13 +58,44 @@ class Hostinger_Amplitude {
 
 	public function send_request( string $endpoint, array $params ): array {
 		try {
-			$response = $this->client->post( $endpoint, [ 'params' => $params ] );
+
+			if ( isset( $params['action'] ) && isset( $params['location'] ) && ! $this->should_send_amplitude_event( $params['action'], $params['location'] ) ) {
+				return array();
+			}
+
+			$response = $this->client->post( $endpoint, array( 'params' => $params ) );
+
 			return $response;
 		} catch ( Exception $exception ) {
 			$this->helper->error_log( 'Error sending request: ' . $exception->getMessage() );
 		}
 
 		return array();
+	}
+
+	public function should_send_amplitude_event( string $event_action, string $location ): bool {
+		$amplitude_actions = new Hostinger_Amplitude_Actions();
+		$one_time_per_day  = array(
+			$amplitude_actions::HOME_ENTER,
+			$amplitude_actions::LEARN_ENTER,
+			$amplitude_actions::AI_ASSISTANT_ENTER,
+			$amplitude_actions::AMAZON_AFFILIATE_ENTER,
+			$amplitude_actions::WOO_ONBOARDING_STARTED,
+			$amplitude_actions::WOO_STORE_SETUP_STORE,
+			$amplitude_actions::WOO_STORE_SETUP_COMPLETED,
+		);
+
+		$event_action = sanitize_text_field( $event_action );
+
+		if ( in_array( $event_action, $one_time_per_day ) && get_transient( $event_action . '-' . $location ) ) {
+			return false;
+		}
+
+		if ( in_array( $event_action, $one_time_per_day ) ) {
+			set_transient( $event_action . '-' . $location, true, self::CACHE_ONE_DAY );
+		}
+
+		return true;
 	}
 
 	public function track_menu_action( string $event_action, string $location ): void {
@@ -73,7 +108,7 @@ class Hostinger_Amplitude {
 
 		$params = array(
 			'action'   => $action,
-			'location' => $location
+			'location' => $location,
 		);
 
 		$this->send_request( $endpoint, $params );
