@@ -14,15 +14,18 @@ class Hostinger_Admin_Ajax {
 		$this->settings         = new Hostinger_Settings();
 		$this->helper           = new Hostinger_Helper();
 		$this->config_handler   = new Hostinger_Config();
-		$this->survey_questions = new Hostinger_Surveys_Questions();
-		$client                 = new Hostinger_Requests_Client(
-			$this->config_handler->get_config_value( 'base_rest_uri', HOSTINGER_REST_URI ),
-			array(
-				Hostinger_Config::TOKEN_HEADER  => $this->helper::get_api_token(),
-				Hostinger_Config::DOMAIN_HEADER => $this->helper->get_host_info(),
-			)
-		);
-		$this->surveys_rest     = new Hostinger_Surveys_Rest( $client );
+		if ( ! empty( Hostinger_Helper::get_api_token() ) ) {
+			$this->survey_questions = new Hostinger_Surveys_Questions();
+			$client                 = new Hostinger_Requests_Client(
+				$this->config_handler->get_config_value( 'base_rest_uri', HOSTINGER_REST_URI ),
+				array(
+					Hostinger_Config::TOKEN_HEADER  => $this->helper::get_api_token(),
+					Hostinger_Config::DOMAIN_HEADER => $this->helper->get_host_info(),
+				)
+			);
+
+			$this->surveys_rest     = new Hostinger_Surveys_Rest( $client );
+		}
 
 		add_action( 'init', array( $this, 'define_ajax_events' ), 0 );
 	}
