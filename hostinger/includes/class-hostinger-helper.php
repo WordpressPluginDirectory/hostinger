@@ -2,9 +2,9 @@
 
 class Hostinger_Helper {
 	public const HOSTINGER_FREE_SUBDOMAIN_URL = 'hostingersite.com';
-	public const HOSTINGER_PAGE = '/wp-admin/admin.php?page=hostinger';
+	public const HOSTINGER_PAGE               = '/wp-admin/admin.php?page=hostinger';
 	public const CLIENT_WOO_COMPLETED_ACTIONS = 'woocommerce_task_list_tracked_completed_tasks';
-	private const PROMOTIONAL_LINKS = array(
+	private const PROMOTIONAL_LINKS           = array(
 		'fr_FR' => 'https://www.hostinger.fr/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
 		'es_ES' => 'https://www.hostinger.es/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
 		'ar'    => 'https://www.hostinger.ae/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
@@ -168,9 +168,9 @@ class Hostinger_Helper {
 	}
 
 	public function get_hpanel_domain_url(): string {
-		$domain_url =  $this->get_domain_from_url();
+		$domain_url = $this->get_domain_from_url();
 
-		if( $domain_url === self::HPANEL_DOMAIN_URL ) {
+		if ( $domain_url === self::HPANEL_DOMAIN_URL ) {
 			return $domain_url;
 		}
 
@@ -189,12 +189,63 @@ class Hostinger_Helper {
 
 			// If everything is fine, return true
 			return true;
-
 		} catch ( Exception $exception ) {
 			// If there's an exception, log the error and return false
-			$this->helper->error_log( 'Error checking eligibility: ' . $exception->getMessage() );
+			$this->error_log( 'Error checking eligibility: ' . $exception->getMessage() );
 			return false;
 		}
+	}
+
+	public static function woocommerce_onboarding_choice(): bool {
+		return (bool) get_option( 'hostinger_woo_onboarding_choice', false );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function is_woocommerce_site(): bool {
+		return class_exists( 'WooCommerce' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function show_woocommerce_onboarding(): bool {
+		$woo_onboarding_enabled     = get_option( 'hostinger_woo_onboarding_enabled', false );
+		$woo_setup_wizard_completed = get_option( 'woocommerce_onboarding_profile', false );
+
+		return ( self::is_woocommerce_site() && ! self::woocommerce_onboarding_choice() && $woo_onboarding_enabled && ! $woo_setup_wizard_completed );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function can_show_store_ready_message(): bool {
+		if ( ! self::is_woocommerce_site() || ! self::woocommerce_onboarding_choice() ) {
+			return false;
+		}
+
+		$store_ready_message_shown = get_option( 'hostinger_woo_ready_message_shown', null );
+
+		if ( $store_ready_message_shown === null ) {
+			return false;
+		}
+
+		if ( (int) $store_ready_message_shown !== 0 ) {
+			return false;
+		}
+
+		if ( ! $this->default_woocommerce_survey_completed() ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public function default_woocommerce_survey_completed(): bool {
+		$completed_actions          = get_option( self::CLIENT_WOO_COMPLETED_ACTIONS, array() );
+		$required_completed_actions = array( 'products', 'payments' );
+		return empty( array_diff( $required_completed_actions, $completed_actions ) );
 	}
 }
 

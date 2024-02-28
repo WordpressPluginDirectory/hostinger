@@ -25,12 +25,25 @@ import * as Survey from 'survey-jquery'
 		}
 
 		$( ".hts-survey-wrapper .close-btn" ).click( function () {
-			if ( ! checkCookie() ) {
-				var expirationTime = new Date();
-				expirationTime.setTime( expirationTime.getTime() + ( 86400 ) ) // 24Hours;
-				document.cookie = "HtsSkipSurvey=1; expires=" + expirationTime.toUTCString() + "; path=/";
-				surveyWrapper.hide();
-			}
+			var expirationTime = new Date();
+			expirationTime.setTime( expirationTime.getTime() + ( 86400 * 30 ) ) // 30 Days;
+			document.cookie = "HtsSkipSurvey=1; expires=" + expirationTime.toUTCString() + "; path=/";
+
+			$.ajax( {
+				url: ajaxurl,
+				method: 'POST',
+				data: {
+					action: 'hostinger_hide_survey',
+					nonce: hostingerContainer.nonce,
+				},
+				dataType: 'json',
+				success: function ( data ) {
+					surveyWrapper.hide();
+				},
+				error: function ( xhr, status, error ) {
+					console.log( 'AJAX request failed: ' + error );
+				}
+			} );
 		} );
 
 		if ( surveyWrapper.length && ! checkCookie() ) {
@@ -44,42 +57,44 @@ import * as Survey from 'survey-jquery'
 				},
 				dataType: 'json',
 				success: function ( data ) {
-					let questionsCount = $( '#hts-questionsLeft' );
-					surveyWrapper.show();
-					const survey = new Survey.Model( data );
-					survey.focusFirstQuestionAutomatic = false;
-					survey.render( "hostinger-feedback-survey" );
-					survey.onComplete.add( onSurveyComplete );
-					survey.onCurrentPageChanged.add( onPageChanged ); // Add this line
-					survey.render( "surveyElement" );
 
-					let answeredQuestions = 0;
-					let totalQuestions = survey.getAllQuestions().length;
-					if ( totalQuestions >= 2 ) {
-						questionsCount.show()
-						$( "#hts-allQuestions" ).html( totalQuestions );
-					}
+						if ( data.success === false) return;
 
-					function updateQuestionsLeft () {
-						var remaining = answeredQuestions + 1;
-						document.getElementById( "hts-currentQuestion" ).textContent = remaining;
-					}
+						let questionsCount = $( '#hts-questionsLeft' );
+						surveyWrapper.show();
+						const survey = new Survey.Model( data );
+						survey.focusFirstQuestionAutomatic = false;
+						survey.render( "hostinger-feedback-survey" );
+						survey.onComplete.add( onSurveyComplete );
+						survey.onCurrentPageChanged.add( onPageChanged ); // Add this line
+						survey.render( "surveyElement" );
 
-					function onPageChanged ( sender, options ) {
-						if ( options.isNextPage || options.isPrevPage ) {
-							answeredQuestions = survey.currentPageNo;
-							updateQuestionsLeft();
+						let answeredQuestions = 0;
+						let totalQuestions = survey.getAllQuestions().length;
+						if ( totalQuestions >= 2 ) {
+							questionsCount.show()
+							$( "#hts-allQuestions" ).html( totalQuestions );
 						}
-					}
 
-					function onSurveyComplete ( sender ) {
-						const results = JSON.stringify( sender.data );
-						$( '#hts-questionsLeft' ).remove();
-						hostinger_submit_survey( results, type );
-					}
+						function updateQuestionsLeft () {
+							var remaining = answeredQuestions + 1;
+							document.getElementById( "hts-currentQuestion" ).textContent = remaining;
+						}
 
-					updateQuestionsLeft();
+						function onPageChanged ( sender, options ) {
+							if ( options.isNextPage || options.isPrevPage ) {
+								answeredQuestions = survey.currentPageNo;
+								updateQuestionsLeft();
+							}
+						}
 
+						function onSurveyComplete ( sender ) {
+							const results = JSON.stringify( sender.data );
+							$( '#hts-questionsLeft' ).remove();
+							hostinger_submit_survey( results, type );
+						}
+
+						updateQuestionsLeft();
 				},
 				error: function ( xhr, status, error ) {
 					console.log( 'AJAX request failed: ' + error );

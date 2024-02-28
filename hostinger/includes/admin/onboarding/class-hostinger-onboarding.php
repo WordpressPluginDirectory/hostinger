@@ -32,11 +32,6 @@ class Hostinger_Onboarding {
 			$steps[] = new Hostinger_Onboarding_Description();
 		}
 
-		if ( class_exists( 'WooCommerce' ) ) {
-			require_once $path . 'class-hostinger-onboarding-add-product-step.php';
-			$steps[] = new Hostinger_Onboarding_Add_Product_Step();
-		}
-
 		$steps[] = new Hostinger_Onboarding_Image_Step();
 		$steps[] = new Hostinger_Onboarding_Heading();
 		$steps[] = new Hostinger_Onboarding_Add_Page();
@@ -44,6 +39,11 @@ class Hostinger_Onboarding {
 		if ( Hostinger_Helper::is_plugin_active( 'hostinger-affiliate-plugin' ) ) {
 			require_once $path . 'class-hostinger-onboarding-connect-affiliate-settings.php';
 			$steps[] = new Hostinger_Onboarding_Connect_Affiliate_Settings();
+		}
+
+		if ( class_exists( 'WooCommerce' ) ) {
+			require_once $path . 'class-hostinger-onboarding-setup-store.php';
+			$steps[] = new Hostinger_Onboarding_Setup_Store();
 		}
 
 		$steps[] = new Hostinger_Onboarding_Connect_Domain_Step();

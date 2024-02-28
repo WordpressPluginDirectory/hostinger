@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -265,3 +265,7 @@ Watching for Changes: During development, you can use "npm run watch" to continu
 
 2.0.8 (2024-02-14)
 - Fixed files loading
+
+2.0.9 (2024-02-20)
+- Astra theme compatibility
+- Internal services improvements

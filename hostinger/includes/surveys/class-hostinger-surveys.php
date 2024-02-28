@@ -88,11 +88,11 @@ class Hostinger_Surveys {
 			return false;
 		}
 
-		$not_submitted                   = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
-		$not_completed                   = ! $this->settings->get_setting( 'feedback_survey_completed' );
-		$content_published               = $this->settings->get_setting( 'content_published' );
-		$is_client_eligible              = $this->is_client_eligible();
-		$is_hostinger_page               = $this->helper->is_hostinger_admin_page();
+		$not_submitted      = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
+		$not_completed      = ! $this->settings->get_setting( 'feedback_survey_completed' );
+		$content_published  = $this->settings->get_setting( 'content_published' );
+		$is_client_eligible = $this->is_client_eligible();
+		$is_hostinger_page  = $this->helper->is_hostinger_admin_page();
 
 		if ( ! $is_hostinger_page || empty( $this->get_survey_questions() ) ) {
 			return false;
@@ -106,14 +106,15 @@ class Hostinger_Surveys {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return false;
 		}
-
 		$not_submitted                 = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
 		$not_completed                 = ! $this->settings->get_setting( 'woocommerce_survey_completed' );
 		$is_woocommerce_page           = $this->is_woocommerce_admin_page();
-		$default_woocommerce_completed = $this->default_woocommerce_survey_completed();
+		$default_woocommerce_completed = $this->helper->default_woocommerce_survey_completed();
+		$oldest_product_date           = $this->get_oldest_product_date();
+		$seven_days_ago                = strtotime( '-7 days' );
 		$is_client_eligible            = $this->is_client_eligible();
 
-		if ( empty( $this->get_survey_questions() ) ) {
+		if ( empty( $this->get_survey_questions() ) || $oldest_product_date < $seven_days_ago ) {
 			return false;
 		}
 
@@ -125,12 +126,12 @@ class Hostinger_Surveys {
 			return false;
 		}
 
-		$first_login_at                  = strtotime( get_option( 'hostinger_first_login_at', time() ) );
-		$not_submitted                   = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
-		$not_completed                   = ! $this->settings->get_setting( 'ai_onboarding_survey_completed' );
-		$is_client_eligible              = $this->is_client_eligible();
-		$is_ai_onboarding_passed         = $this->settings->get_setting( 'ai_onboarding' );
-		$is_hostinger_admin_page         = $this->helper->is_hostinger_admin_page();
+		$first_login_at          = strtotime( get_option( 'hostinger_first_login_at', time() ) );
+		$not_submitted           = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
+		$not_completed           = ! $this->settings->get_setting( 'ai_onboarding_survey_completed' );
+		$is_client_eligible      = $this->is_client_eligible();
+		$is_ai_onboarding_passed = $this->settings->get_setting( 'ai_onboarding' );
+		$is_hostinger_admin_page = $this->helper->is_hostinger_admin_page();
 
 		if ( ! $is_ai_onboarding_passed || empty( $this->get_survey_questions() ) ) {
 			return false;
@@ -149,11 +150,11 @@ class Hostinger_Surveys {
 			return false;
 		}
 
-		$not_submitted                   = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
-		$not_completed                   = ! $this->settings->get_setting( 'affiliate_survey_completed' );
-		$affiliate_links_exsists         = $this->settings->get_setting( 'affiliate_links_created' );
-		$is_hostinger_admin_page         = $this->helper->is_hostinger_admin_page();
-		$is_client_eligible              = $this->is_client_eligible();
+		$not_submitted           = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
+		$not_completed           = ! $this->settings->get_setting( 'affiliate_survey_completed' );
+		$affiliate_links_exsists = $this->settings->get_setting( 'affiliate_links_created' );
+		$is_hostinger_admin_page = $this->helper->is_hostinger_admin_page();
+		$is_client_eligible      = $this->is_client_eligible();
 
 		if ( ! $is_hostinger_admin_page || empty( $this->get_survey_questions() ) ) {
 			return false;
@@ -162,31 +163,34 @@ class Hostinger_Surveys {
 		return $not_submitted && $not_completed && $affiliate_links_exsists && $is_client_eligible;
 	}
 
-	public function default_woocommerce_survey_completed(): bool {
-		$completed_actions          = get_option( self::CLIENT_WOO_COMPLETED_ACTIONS, array() );
-		$required_completed_actions = array( 'products', 'payments' );
-
-		return empty( array_diff( $required_completed_actions, $completed_actions ) );
-	}
-
 	public function is_client_eligible(): bool {
 		$transient_request_key  = self::IS_CLIENT_ELIGIBLE_TRANSIENT_REQUEST;
 		$transient_response_key = self::IS_CLIENT_ELIGIBLE_TRANSIENT_RESPONSE;
+		$cached_eligibility     = get_transient( $transient_response_key );
+
+		// Check if a request is already in progress
+		if ( get_transient( 'hts_eligible_request' ) ) {
+			return false;
+		}
 
 		// Check if transient response exists
-		$cached_eligibility = get_transient( $transient_response_key );
-
 		if ( $cached_eligibility && ( $cached_eligibility === 'eligible' || $cached_eligibility === 'not_eligible' ) ) {
 			return $cached_eligibility === 'eligible';
 		}
 
 		// Attempt to set transient request
-		if( ! $this->helper->check_transient_eligibility( $transient_request_key, self::CACHE_THREE_HOURS ) ) {
+		if ( ! $this->helper->check_transient_eligibility( $transient_request_key, self::CACHE_THREE_HOURS ) ) {
 			return false;
 		}
 
 		try {
+			// Set transient flag to indicate request in progress
+			set_transient( 'hts_eligible_request', 'in_progress', 60 );
+
 			$is_eligible = $this->surveys_rest->is_client_eligible();
+
+			// Clear the request transient flag
+			delete_transient( 'hts_eligible_request' );
 
 			if ( has_action( 'litespeed_purge_all' ) ) {
 				do_action( 'litespeed_purge_all' );
@@ -199,7 +203,6 @@ class Hostinger_Surveys {
 
 			set_transient( $transient_response_key, 'not_eligible', self::CACHE_THREE_HOURS );
 			return false;
-
 		} catch ( Exception $exception ) {
 			$this->helper->error_log( 'Error checking eligibility: ' . $exception->getMessage() );
 
@@ -211,6 +214,11 @@ class Hostinger_Surveys {
 		$transient_request_key  = self::SURVEY_QUESTIONS_TRANSIENT_REQUEST;
 		$transient_response_key = self::SURVEY_QUESTIONS_TRANSIENT_RESPONSE;
 
+		// Check if a request is already in progress
+		if ( get_transient( 'hts_questions_request' ) ) {
+			return array();
+		}
+
 		// Check if transient response exists
 		$cached_questions = get_transient( $transient_response_key );
 
@@ -219,12 +227,17 @@ class Hostinger_Surveys {
 		}
 
 		// Attempt to set transient request
-		if( ! $this->helper->check_transient_eligibility( $transient_request_key, self::CACHE_THREE_HOURS ) ) {
+		if ( ! $this->helper->check_transient_eligibility( $transient_request_key, self::CACHE_THREE_HOURS ) ) {
 			return array();
 		}
 
 		try {
+			// Set transient flag to indicate request in progress
+			set_transient( 'hts_questions_request', 'in_progress', 60 );
 			$survey_questions = $this->surveys_rest->get_survey_questions();
+
+			// Clear the request transient flag
+			delete_transient( 'hts_questions_request' );
 
 			set_transient( $transient_response_key, $survey_questions, self::CACHE_THREE_HOURS );
 
@@ -373,7 +386,7 @@ class Hostinger_Surveys {
 			</div>
 			<div id="hostinger-feedback-survey"></div>
 			<div id="hts-questionsLeft">
-				<span id="hts-currentQuestion">1</span> 
+				<span id="hts-currentQuestion">1</span>
 				<?php
 				echo esc_html(
 					__(
@@ -382,7 +395,7 @@ class Hostinger_Surveys {
 					)
 				);
 				?>
-					<?php echo esc_html( __( 'of ', 'hostinger' ) ); ?>
+				<?php echo esc_html( __( 'of ', 'hostinger' ) ); ?>
 				<span id="hts-allQuestions"></span>
 			</div>
 		</div>
@@ -424,7 +437,7 @@ class Hostinger_Surveys {
 
 	private function extract_between_values( string $rule, int $position ): array {
 		$between_prefix_length = strlen( 'between:' );
-		$between_values      = explode( ',', substr( $rule, $position + $between_prefix_length ) );
+		$between_values        = explode( ',', substr( $rule, $position + $between_prefix_length ) );
 
 		return count( $between_values ) === 2 ? $between_values : array();
 	}
@@ -445,7 +458,6 @@ class Hostinger_Surveys {
 						'answer'        => self::WOO_SURVEY_IDENTIFIER,
 					),
 				);
-				break;
 			case 'ai_onboarding_survey':
 				return array(
 					array(
@@ -453,7 +465,6 @@ class Hostinger_Surveys {
 						'answer'        => self::AI_ONBOARDING_SURVEY_IDENTIFIER,
 					),
 				);
-				break;
 			case 'affiliate_plugin_survey':
 				return array(
 					array(
@@ -461,13 +472,12 @@ class Hostinger_Surveys {
 						'answer'        => self::AFFILIATE_SURVEY_IDENTIFIER,
 					),
 				);
-				break;
 			default:
 				return array(
 					array(
 						'question_slug' => self::LOCATION_SLUG,
 						'answer'        => 'wordpress_ai_plugin',
-					)
+					),
 				);
 		}
 	}
@@ -483,7 +493,7 @@ class Hostinger_Surveys {
 		return $data;
 	}
 
-	private function filter_questions_by_slug( array $all_questions, $question_slugs ): array {
+	private function filter_questions_by_slug( array $all_questions, array $question_slugs ): array {
 		$questions_with_required_rule = array();
 
 		foreach ( $all_questions as $question ) {
@@ -500,5 +510,32 @@ class Hostinger_Surveys {
 
 	private function is_survey_question_required( array $question ): bool {
 		return isset( $question['rules'] ) && in_array( 'required', $question['rules'] );
+	}
+
+	public function get_oldest_product_date(): int {
+		global $wpdb;
+
+		$get_product_date = $wpdb->prepare(
+			"
+	        SELECT MIN(post_date) 
+	        FROM {$wpdb->posts} 
+	        WHERE post_type = %s
+	        AND post_status = %s
+        ",
+			'product',
+			'publish'
+		);
+
+		$oldest_product_date = $wpdb->get_var( $get_product_date );
+
+		if ( $oldest_product_date !== null ) {
+			$oldest_product_date_timestamp = strtotime( $oldest_product_date );
+
+			if ( $oldest_product_date_timestamp !== false ) {
+				return $oldest_product_date_timestamp;
+			}
+		}
+
+		return strtotime( '-1 year' );
 	}
 }

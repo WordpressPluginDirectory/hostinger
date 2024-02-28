@@ -27,6 +27,10 @@ class Hostinger_Admin_Assets {
 	public function admin_styles(): void {
 		if ( $this->helper->is_hostinger_admin_page() ) {
 			wp_enqueue_style( 'hostinger_main_styles', HOSTINGER_ASSETS_URL . '/css/main.css', array(), HOSTINGER_VERSION );
+
+			if ( Hostinger_Helper::show_woocommerce_onboarding() ) {
+				wp_enqueue_style( 'hostinger_woo_onboarding', HOSTINGER_ASSETS_URL . '/css/woo-onboarding.css', array(), HOSTINGER_VERSION );
+			}
 		}
 
 		wp_enqueue_style( 'hostinger_global_styles', HOSTINGER_ASSETS_URL . '/css/global.css', array(), HOSTINGER_VERSION );
@@ -51,6 +55,19 @@ class Hostinger_Admin_Assets {
 				HOSTINGER_VERSION,
 				false
 			);
+
+			if ( Hostinger_Helper::show_woocommerce_onboarding() ) {
+				wp_enqueue_script(
+					'hostinger_woo_onboarding',
+					HOSTINGER_ASSETS_URL . '/js/woo-onboarding.js',
+					array(
+						'jquery',
+						'wp-i18n',
+					),
+					HOSTINGER_VERSION,
+					false
+				);
+			}
 		}
 
 		wp_enqueue_script(

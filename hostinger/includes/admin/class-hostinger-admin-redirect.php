@@ -26,7 +26,7 @@ class Hostinger_Admin_Redirect {
 				'init',
 				static function () {
 					$redirect_url = admin_url( 'admin.php?page=hostinger' );
-					wp_redirect( $redirect_url );
+					wp_safe_redirect( $redirect_url );
 					exit;
 				}
 			);

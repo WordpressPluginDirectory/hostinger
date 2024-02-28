@@ -81,7 +81,7 @@ class Hostinger_Bootstrap {
 		$rest             = new Hostinger_Surveys_Rest( $client );
 		$surveys          = new Hostinger_Surveys( $settings, $helper, $config_handler, $survey_questions, $rest );
 
-		switch (true) {
+		switch ( true ) {
 			case $surveys->is_woocommerce_survey_enabled():
 				$survey_function = 'customer_csat_survey';
 				break;
@@ -102,7 +102,7 @@ class Hostinger_Bootstrap {
 				return; // No survey enabled
 		}
 
-		$this->loader->add_action('admin_footer', $surveys, $survey_function, 10);
+		$this->loader->add_action( 'admin_footer', $surveys, $survey_function, 10 );
 	}
 
 	private function load_public_dependencies(): void {

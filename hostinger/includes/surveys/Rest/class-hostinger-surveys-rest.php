@@ -21,7 +21,9 @@ class Hostinger_Surveys_Rest {
 			self::CLIENT_SURVEY_ELIGIBILITY,
 			array(
 				'identifier' => self::CLIENT_SURVEY_IDENTIFIER,
-			)
+			),
+			array(),
+			10
 		);
 
 		$decoded_response = $this->decode_response( $response );
@@ -40,7 +42,9 @@ class Hostinger_Surveys_Rest {
 			self::GET_SURVEY,
 			array(
 				'identifier' => self::CLIENT_SURVEY_IDENTIFIER,
-			)
+			),
+			array(),
+			10
 		);
 
 		if ( ! $this->get_result( $response ) ) {

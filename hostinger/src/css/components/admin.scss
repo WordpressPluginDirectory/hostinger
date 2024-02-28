@@ -90,10 +90,23 @@
   font-weight: 400;
 }
 
-.hostinger.hsr-onboarding p {
-  color: $paragraph-color;
-  margin-top: 8px;
-  line-height: 24px;
+.hostinger.hsr-onboarding {
+
+  p,
+  ul {
+     color: $paragraph-color;
+     margin-top: 8px;
+     line-height: 24px;
+  }
+
+  ul {
+     list-style-type: disc;
+     margin-left: 25px;
+
+     li {
+         text-align: left;
+     }
+  }
 }
 
 .hsr-onboarding-steps {

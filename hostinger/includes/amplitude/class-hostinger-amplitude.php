@@ -1,23 +1,23 @@
 <?php
 
 class Hostinger_Amplitude {
-	public const AMPLITUDE_ENDPOINT = '/v3/wordpress/plugin/trigger-event';
-	private const WOO_WIZARD_PAGE = 'page=wc-admin&path=/setup-wizard';
-	private const WOO_ONBOARDING_COMPLETED = 'woocommerce_default_onboarding_completed';
-	private const AMPLITUDE_HOME_SLUG = 'home';
-	private const AMPLITUDE_LEARN_SLUG = 'learn';
-	private const AMPLITUDE_AI_ASSISTANT_SLUG = 'ai-assistant';
-	private const AMAZON_AFFILIATE_SLUG = 'amazon_affiliate';
-	private const WOO_REQUIRED_ONBOARDING_STEPS = array( 'products', 'payments' );
-	private const WOO_ONBOARDING_TRANSIENT_REQUEST = 'woocommerce_onboarding_request';
-	private const WOO_ONBOARDING_TRANSIENT_RESPONSE = 'woocommerce_onboarding_response';
-	private const WOO_ONBOARDING_TRANSIENT_ATTEMPTS = 'woocommerce_onboarding_attempts';
+	public const AMPLITUDE_ENDPOINT                         = '/v3/wordpress/plugin/trigger-event';
+	private const WOO_WIZARD_PAGE                           = 'page=wc-admin&path=/setup-wizard';
+	private const WOO_ONBOARDING_COMPLETED                  = 'woocommerce_default_onboarding_completed';
+	private const AMPLITUDE_HOME_SLUG                       = 'home';
+	private const AMPLITUDE_LEARN_SLUG                      = 'learn';
+	private const AMPLITUDE_AI_ASSISTANT_SLUG               = 'ai-assistant';
+	private const AMAZON_AFFILIATE_SLUG                     = 'amazon_affiliate';
+	private const WOO_REQUIRED_ONBOARDING_STEPS             = array( 'products', 'payments' );
+	private const WOO_ONBOARDING_TRANSIENT_REQUEST          = 'woocommerce_onboarding_request';
+	private const WOO_ONBOARDING_TRANSIENT_RESPONSE         = 'woocommerce_onboarding_response';
+	private const WOO_ONBOARDING_TRANSIENT_ATTEMPTS         = 'woocommerce_onboarding_attempts';
 	private const WOO_ONBOARDING_STARTED_TRANSIENT_ATTEMPTS = 'woocommerce_started_attempts';
-	private const WOO_ONBOARDING_STARTED_TRANSIENT_REQUEST = 'woocommerce_started_request';
+	private const WOO_ONBOARDING_STARTED_TRANSIENT_REQUEST  = 'woocommerce_started_request';
 	private const WOO_ONBOARDING_STARTED_TRANSIENT_RESPONSE = 'woocommerce_started_response';
-	private const CACHE_SIX_HOURS = 3600 * 6;
-	private const CACHE_ONE_HOUR = 3600;
-	private const CACHE_ONE_DAY = 86400;
+	private const CACHE_SIX_HOURS                           = 3600 * 6;
+	private const CACHE_ONE_HOUR                            = 3600;
+	private const CACHE_ONE_DAY                             = 86400;
 
 	private Hostinger_Config $config_handler;
 	private Hostinger_Requests_Client $client;
@@ -58,7 +58,6 @@ class Hostinger_Amplitude {
 
 	public function send_request( string $endpoint, array $params ): array {
 		try {
-
 			if ( isset( $params['action'] ) && isset( $params['location'] ) && ! $this->should_send_amplitude_event( $params['action'], $params['location'] ) ) {
 				return array();
 			}
@@ -145,15 +144,18 @@ class Hostinger_Amplitude {
 			default:
 				return '';
 		}
-
 	}
 
 	public function woocommerce_onboarding_started(): void {
 		$transient_response_key = self::WOO_ONBOARDING_STARTED_TRANSIENT_RESPONSE;
 		$transient_attempts_key = self::WOO_ONBOARDING_STARTED_TRANSIENT_ATTEMPTS;
 		$onboarding_started     = get_transient( $transient_response_key );
-		$request_attempts       = get_transient( $transient_attempts_key ) ?: 0;
+		$request_attempts       = get_transient( $transient_attempts_key );
 		$amplitude_actions      = new Hostinger_Amplitude_Actions();
+
+		if ( false === $request_attempts ) {
+			$request_attempts = 0;
+		}
 
 		if ( $onboarding_started || $request_attempts > 20 ) {
 			return;
@@ -167,7 +169,7 @@ class Hostinger_Amplitude {
 			}
 
 			if ( $this->helper->is_this_page( self::WOO_WIZARD_PAGE ) ) {
-				$request = $this->send_request( self::AMPLITUDE_ENDPOINT, [ 'action' => $amplitude_actions::WOO_ONBOARDING_STARTED ] );
+				$request = $this->send_request( self::AMPLITUDE_ENDPOINT, array( 'action' => $amplitude_actions::WOO_ONBOARDING_STARTED ) );
 
 				if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
 					set_transient( $transient_response_key, true, self::CACHE_SIX_HOURS );
@@ -178,7 +180,7 @@ class Hostinger_Amplitude {
 		} catch ( Exception $exception ) {
 			$this->helper->error_log( 'Error checking onboarding started: ' . $exception->getMessage() );
 		} finally {
-			set_transient( $transient_attempts_key, ++ $request_attempts, self::CACHE_SIX_HOURS );
+			set_transient( $transient_attempts_key, ++$request_attempts, self::CACHE_SIX_HOURS );
 		}
 	}
 
@@ -204,7 +206,7 @@ class Hostinger_Amplitude {
 			}
 
 			if ( $completed_steps ) {
-				$request = $this->send_request( self::AMPLITUDE_ENDPOINT, [ 'action' => $amplitude_actions::WOO_STORE_SETUP_COMPLETED ] );
+				$request = $this->send_request( self::AMPLITUDE_ENDPOINT, array( 'action' => $amplitude_actions::WOO_STORE_SETUP_COMPLETED ) );
 
 				if ( wp_remote_retrieve_response_code( $request ) == 200 ) {
 					set_transient( $transient_response_key, true, self::CACHE_SIX_HOURS );
@@ -216,11 +218,9 @@ class Hostinger_Amplitude {
 		} catch ( Exception $exception ) {
 			$this->helper->error_log( 'Error checking onboarding completion: ' . $exception->getMessage() );
 		} finally {
-			set_transient( $transient_attempts_key, ++ $request_attempts, self::CACHE_SIX_HOURS );
+			set_transient( $transient_attempts_key, ++$request_attempts, self::CACHE_SIX_HOURS );
 		}
 	}
-
-
 }
 
 new Hostinger_Amplitude();
