@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 class Hostinger_Admin_Ajax {
 	private const PROMOTIONAL_BANNER_TRANSIENT = 'hts_hide_promotional_banner_transient';
 	private const HIDE_SURVEY_TRANSIENT        = 'hts_hide_survey';
+	private const HIDE_OMNISEND_NOTICE         = 'hts_omnisend_notice_hidden';
 	private const TWO_DAYS                     = 86400 * 2;
 	private const THIRTY_DAYS                  = 86400 * 30;
 
@@ -46,6 +47,7 @@ class Hostinger_Admin_Ajax {
 			'get_survey',
 			'submit_survey',
 			'hide_survey',
+			'dismiss_omnisend_notice',
 		);
 
 		foreach ( $events as $event ) {
@@ -279,6 +281,17 @@ class Hostinger_Admin_Ajax {
 		);
 
 		wp_send_json_success( $response );
+	}
+
+	public function dismiss_omnisend_notice(): void {
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'hts_close_omnisend' ) ) {
+			wp_send_json_error( 'Invalid nonce' );
+		}
+
+		$_SESSION[ self::HIDE_OMNISEND_NOTICE ] = true;
+		wp_die();
 	}
 }
 

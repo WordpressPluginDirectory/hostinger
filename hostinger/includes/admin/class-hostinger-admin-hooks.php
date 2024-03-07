@@ -11,6 +11,7 @@ class Hostinger_Admin_Hooks {
 		add_action( 'admin_footer', array( $this, 'rate_plugin' ) );
 		add_action( 'admin_init', array( $this, 'hide_astra_builder_selection_screen' ) );
 		add_action( 'admin_init', array( $this, 'enable_woo_onboarding' ) );
+		add_action( 'admin_notices', array( $this, 'omnisend_discount_notice' ) );
 		add_filter( 'woocommerce_prevent_automatic_wizard_redirect', '__return_true' );
 
 		if ( ! Hostinger_Helper::show_woocommerce_onboarding() ) {
@@ -63,6 +64,23 @@ class Hostinger_Admin_Hooks {
 		}
 	}
 
+	public function omnisend_discount_notice(): void {
+		$omnisend_notice_hidden = filter_var( isset( $_SESSION['hts_omnisend_notice_hidden'] ) ? $_SESSION['hts_omnisend_notice_hidden'] : false, FILTER_VALIDATE_BOOLEAN );
+
+		if ( ! $omnisend_notice_hidden && ( $this->helper->is_hostinger_admin_page() || $this->helper->is_this_page( '/wp-admin/admin.php?page=omnisend' ) ) && ( Hostinger_Helper::is_plugin_active( 'class-omnisend-core-bootstrap' ) || Hostinger_Helper::is_plugin_active( 'omnisend-woocommerce' ) ) ) : ?>
+			<div class="notice notice-info hts-admin-notice hts-omnisend">
+				<p><?php echo wp_kses( __( 'Use special discount code <b>ONLYHOSTINGER30</b> to get 30% off for 6 months when you upgrade.', 'hostinger' ), array( 'b' => array() ) ); ?></p>
+				<div>
+					<a class="button button-primary"
+					   href="https://your.omnisend.com/LXqyZ0"
+					   target="_blank"><?= esc_html__( 'Get Discount', 'hostinger' ); ?></a>
+					<button type="button" class="notice-dismiss"></button>
+				</div>
+			</div>
+		<?php endif;
+		wp_nonce_field( 'hts_close_omnisend', 'hts_close_omnisend_nonce', true );
+	}
+
 	public function hide_astra_builder_selection_screen(): void {
 		add_filter( 'st_enable_block_page_builder', '__return_true' );
 	}
@@ -113,10 +131,10 @@ class Hostinger_Admin_Hooks {
 			<p><?php echo esc_html__( 'One more step to reach your online success. Finalize the visual and technical aspects of your website using our recommendations checklist.', 'hostinger' ); ?></p>
 			<p>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=hostinger&hide-store-notice' ) ); ?>"
-					class="components-button is-primary"><?php echo esc_html__( 'Visit Hostinger plugin', 'hostinger' ); ?></a>
+				   class="components-button is-primary"><?php echo esc_html__( 'Visit Hostinger plugin', 'hostinger' ); ?></a>
 				<a href="<?php echo esc_url( home_url() ); ?>"
-					target="_blank"
-					class="components-button is-secondary"><?php echo esc_html__( 'Preview store', 'hostinger' ); ?></a>
+				   target="_blank"
+				   class="components-button is-secondary"><?php echo esc_html__( 'Preview store', 'hostinger' ); ?></a>
 			</p>
 		</div>
 		<?php
@@ -133,13 +151,13 @@ class Hostinger_Admin_Hooks {
 		}
 		?>
 		<style type="text/css">
-			.woocommerce-layout__notice-list-hide {
-				display: block !important;
-			}
+            .woocommerce-layout__notice-list-hide {
+                display: block !important;
+            }
 
-			.notice-hst {
-				border-left-color: #673DE6;
-			}
+            .notice-hst {
+                border-left-color: #673DE6;
+            }
 		</style>
 		<?php
 

@@ -143,8 +143,13 @@ a.hsr-secondary-btn:hover {
 	display: none !important;
 }
 
-.toplevel_page_hostinger .notice.notice-info .hts-admin-notice {
+.toplevel_page_hostinger .notice.notice-info .hts-admin-notice,.toplevel_page_hostinger .notice.notice-info.hts-admin-notice {
 	display: block !important;
+}
+
+.toplevel_page_hostinger .notice.notice-info.hts-omnisend {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .hts-heading {
@@ -227,6 +232,10 @@ a.hsr-secondary-btn:hover {
 		top:25px;
 		display: flex;
 		align-items: center;
+
+		&:hover {
+			border-bottom: 1px solid $primary-purple;
+		}
 
 		a {
 			text-decoration: none;

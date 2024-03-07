@@ -2,9 +2,9 @@
 
 class Hostinger_Helper {
 	public const HOSTINGER_FREE_SUBDOMAIN_URL = 'hostingersite.com';
-	public const HOSTINGER_PAGE               = '/wp-admin/admin.php?page=hostinger';
+	public const HOSTINGER_PAGE = '/wp-admin/admin.php?page=hostinger';
 	public const CLIENT_WOO_COMPLETED_ACTIONS = 'woocommerce_task_list_tracked_completed_tasks';
-	private const PROMOTIONAL_LINKS           = array(
+	private const PROMOTIONAL_LINKS = array(
 		'fr_FR' => 'https://www.hostinger.fr/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
 		'es_ES' => 'https://www.hostinger.es/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
 		'ar'    => 'https://www.hostinger.ae/cpanel-login?r=%2Fjump-to%2Fnew-panel%2Fsection%2Freferrals&utm_source=Banner&utm_medium=HostingerWPplugin',
@@ -44,6 +44,7 @@ class Hostinger_Helper {
 		if ( file_exists( $token_file ) && ! empty( file_get_contents( $token_file ) ) ) {
 			$api_token = file_get_contents( $token_file );
 		}
+
 		return $api_token;
 	}
 
@@ -192,6 +193,7 @@ class Hostinger_Helper {
 		} catch ( Exception $exception ) {
 			// If there's an exception, log the error and return false
 			$this->error_log( 'Error checking eligibility: ' . $exception->getMessage() );
+
 			return false;
 		}
 	}
@@ -245,7 +247,18 @@ class Hostinger_Helper {
 	public function default_woocommerce_survey_completed(): bool {
 		$completed_actions          = get_option( self::CLIENT_WOO_COMPLETED_ACTIONS, array() );
 		$required_completed_actions = array( 'products', 'payments' );
+
 		return empty( array_diff( $required_completed_actions, $completed_actions ) );
+	}
+
+	public function register_session() {
+		if ( ! session_id() ) {
+			session_start();
+		}
+	}
+
+	public function destroy_session() {
+		session_destroy();
 	}
 }
 
