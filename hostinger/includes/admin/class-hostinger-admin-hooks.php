@@ -21,6 +21,8 @@ class Hostinger_Admin_Hooks {
 		add_action( 'admin_init', array( $this, 'store_ready_message_logic' ), 0 );
 		add_action( 'admin_notices', array( $this, 'show_store_ready_message' ), 0 );
 		add_action( 'admin_head', array( $this, 'force_woo_notices' ) );
+
+		add_action( 'requests-curl.before_request', array( $this, 'session_write_close' ), 9999 );
 	}
 
 	public function enable_woo_onboarding(): bool {
@@ -67,9 +69,9 @@ class Hostinger_Admin_Hooks {
 	public function omnisend_discount_notice(): void {
 		$omnisend_notice_hidden = filter_var( isset( $_SESSION['hts_omnisend_notice_hidden'] ) ? $_SESSION['hts_omnisend_notice_hidden'] : false, FILTER_VALIDATE_BOOLEAN );
 
-		if ( ! $omnisend_notice_hidden && ( $this->helper->is_hostinger_admin_page() || $this->helper->is_this_page( '/wp-admin/admin.php?page=omnisend' ) ) && ( Hostinger_Helper::is_plugin_active( 'class-omnisend-core-bootstrap' ) || Hostinger_Helper::is_plugin_active( 'omnisend-woocommerce' ) ) ) : ?>
+		if ( ! $omnisend_notice_hidden && ( $this->helper->is_this_page( '/wp-admin/admin.php?page=omnisend' ) ) && ( Hostinger_Helper::is_plugin_active( 'class-omnisend-core-bootstrap' ) || Hostinger_Helper::is_plugin_active( 'omnisend-woocommerce' ) ) ) : ?>
 			<div class="notice notice-info hts-admin-notice hts-omnisend">
-				<p><?php echo wp_kses( __( 'Use special discount code <b>ONLYHOSTINGER30</b> to get 30% off for 6 months when you upgrade.', 'hostinger' ), array( 'b' => array() ) ); ?></p>
+				<p><?php echo wp_kses( __( 'Use the special discount code <b>ONLYHOSTINGER30</b> to get 30% off on Omnisend for 6 months when you upgrade.', 'hostinger' ), array( 'b' => array() ) ); ?></p>
 				<div>
 					<a class="button button-primary"
 					   href="https://your.omnisend.com/LXqyZ0"
@@ -162,6 +164,17 @@ class Hostinger_Admin_Hooks {
 		<?php
 
 		return '';
+	}
+
+	/**
+	 * Session start REST API fix
+	 *
+	 * @param $curlhandle
+	 *
+	 * @return void
+	 */
+	public function session_write_close( $curlhandle ): void {
+		session_write_close();
 	}
 }
 
