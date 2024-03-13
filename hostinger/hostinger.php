@@ -3,7 +3,7 @@
  * Plugin Name: Hostinger
  * Plugin URI: https://hostinger.com
  * Description: Hostinger WordPress plugin.
- * Version: 2.1.1
+ * Version: 2.1.2
  * Requires at least: 5.5
  * Requires PHP: 7.4
  * Author: Hostinger
@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'HOSTINGER_VERSION' ) ) {
-	define( 'HOSTINGER_VERSION', '2.1.1' );
+	define( 'HOSTINGER_VERSION', '2.1.2' );
 }
 
 if ( ! defined( 'HOSTINGER_ABSPATH' ) ) {

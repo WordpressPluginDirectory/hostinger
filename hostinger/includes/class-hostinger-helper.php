@@ -251,15 +251,6 @@ class Hostinger_Helper {
 		return empty( array_diff( $required_completed_actions, $completed_actions ) );
 	}
 
-	public function register_session() {
-		if ( ! session_id() ) {
-			session_start();
-		}
-	}
-
-	public function destroy_session() {
-		session_destroy();
-	}
 }
 
 $hostinger_helper = new Hostinger_Helper();

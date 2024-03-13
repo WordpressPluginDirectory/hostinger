@@ -13,14 +13,7 @@ class Hostinger_Bootstrap {
 	public function run(): void {
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->session_actions();
 		$this->loader->run();
-	}
-
-	public function session_actions() {
-		$helper = new Hostinger_Helper();
-		$this->loader->add_action( 'init', $helper, 'register_session' );
-		$this->loader->add_action( 'wp_logout', $helper, 'destroy_session' );
 	}
 
 	private function load_dependencies(): void {

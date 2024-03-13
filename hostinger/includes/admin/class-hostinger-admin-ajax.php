@@ -7,6 +7,7 @@ class Hostinger_Admin_Ajax {
 	private const HIDE_SURVEY_TRANSIENT        = 'hts_hide_survey';
 	private const HIDE_OMNISEND_NOTICE         = 'hts_omnisend_notice_hidden';
 	private const TWO_DAYS                     = 86400 * 2;
+	private const SIX_MONTHS                   = 15780000;
 	private const THIRTY_DAYS                  = 86400 * 30;
 
 	private Hostinger_Config $config_handler;
@@ -290,8 +291,8 @@ class Hostinger_Admin_Ajax {
 			wp_send_json_error( 'Invalid nonce' );
 		}
 
-		$_SESSION[ self::HIDE_OMNISEND_NOTICE ] = true;
-		wp_die();
+		set_transient( self::HIDE_OMNISEND_NOTICE, true, self::SIX_MONTHS );
+
 	}
 }
 
