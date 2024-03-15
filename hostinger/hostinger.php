@@ -3,7 +3,7 @@
  * Plugin Name: Hostinger
  * Plugin URI: https://hostinger.com
  * Description: Hostinger WordPress plugin.
- * Version: 2.1.2
+ * Version: 2.1.4
  * Requires at least: 5.5
  * Requires PHP: 7.4
  * Author: Hostinger
@@ -16,10 +16,14 @@
  * @package Hostinger
  */
 
+use Hostinger\Hostinger;
+use Hostinger\Activator;
+use Hostinger\Deactivator;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'HOSTINGER_VERSION' ) ) {
-	define( 'HOSTINGER_VERSION', '2.1.2' );
+	define( 'HOSTINGER_VERSION', '2.1.4' );
 }
 
 if ( ! defined( 'HOSTINGER_ABSPATH' ) ) {
@@ -52,30 +56,29 @@ if ( ! defined( 'HOSTINGER_REST_URI' ) ) {
 	define( 'HOSTINGER_REST_URI', 'https://rest-hosting.hostinger.com' );
 }
 
-/**
- * Plugin activation hook.
- *
- * @return void
- */
-function hostinger_activate(): void {
-	require_once HOSTINGER_ABSPATH . 'includes/class-hostinger-activator.php';
-	Hostinger_Activator::activate();
+$vendor_file = __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
+if ( file_exists( $vendor_file ) ) {
+	require_once $vendor_file;
 }
 
 /**
- * Plugin dectivation hook.
- *
- * @return void
+ * Plugin activation hook.
+ */
+function hostinger_activate(): void {
+	Activator::activate();
+}
+
+/**
+ * Plugin deactivation hook.
  */
 function hostinger_deactivate(): void {
-	require_once HOSTINGER_ABSPATH . 'includes/class-hostinger-deactivator.php';
-	Hostinger_Deactivator::deactivate();
+	Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'hostinger_activate' );
 register_deactivation_hook( __FILE__, 'hostinger_deactivate' );
 
-require_once HOSTINGER_ABSPATH . 'includes/class-hostinger.php';
 
 $hostinger = new Hostinger();
 $hostinger->run();

@@ -1,6 +1,5 @@
 import './autocomplete_steps'
 
-
 (function ($) {
 
 	$(document).on('ready', function () {
