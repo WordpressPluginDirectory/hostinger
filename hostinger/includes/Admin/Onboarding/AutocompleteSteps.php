@@ -64,7 +64,7 @@ class AutocompleteSteps {
 		}
 	}
 
-	public function logo_upload( WP_Customize_Manager $data ): void {
+	public function logo_upload( \WP_Customize_Manager $data ): void {
 		$action = Admin_Actions::LOGO_UPLOAD;
 
 		$logo_updated = array_filter(
@@ -128,7 +128,7 @@ class AutocompleteSteps {
 		}
 	}
 
-	public function edit_site_title( WP_Customize_Manager $data ): void {
+	public function edit_site_title( \WP_Customize_Manager $data ): void {
 		$action        = Admin_Actions::EDIT_SITE_TITLE;
 		$changed_title = $data->changeset_data()['blogname']['value'] ?? '';
 		$cookie_value  = isset( $_COOKIE[ $action ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ $action ] ) ) : '';
