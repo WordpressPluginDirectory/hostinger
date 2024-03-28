@@ -232,5 +232,3 @@ class Amplitude {
 		}
 	}
 }
-
-new Amplitude();

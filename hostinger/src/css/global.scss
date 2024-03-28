@@ -2,17 +2,17 @@
 @import "components/survey";
 
 .theme-astra.intelligent-starter-templates-onboarding .stc-toggle-dropdown-popup-item {
-	display:none;
+	display: none;
 }
 
 .theme-astra.intelligent-starter-templates-onboarding .stc-toggle-dropdown-popup-item.active {
-	display:block;
+	display: block;
 }
 
 #wp__notice-list {
 	.notice-hst {
-		padding-top:7.5px;
-		padding-bottom:7.5px;
+		padding-top: 7.5px;
+		padding-bottom: 7.5px;
 		margin-top: 25px;
 
 		.components-button {
@@ -24,4 +24,48 @@
 .notice.notice-info.hts-omnisend {
 	position: relative;
 	padding: 12px;
+}
+
+#wpadminbar {
+	#wp-admin-bar-hostinger_admin_bar {
+
+		.ab-item {
+			display: flex;
+			align-items: center;
+
+			svg {
+				max-height: 22px;
+				margin-right: 6px;
+				fill: $wp-gray;
+			}
+
+		}
+
+		&:hover {
+
+			svg {
+				fill: $wp-blue;
+			}
+
+		}
+
+		.ab-sub-wrapper {
+			.ab-item {
+				svg {
+					fill: $wp-gray;
+					margin-left: 3px;
+					max-height: 18px;
+				}
+
+				&:hover {
+
+					svg {
+						fill: $wp-blue;
+					}
+
+				}
+			}
+		}
+
+	}
 }

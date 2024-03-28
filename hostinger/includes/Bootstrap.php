@@ -13,6 +13,7 @@ use Hostinger\Admin\Hooks as AdminHooks;
 use Hostinger\Admin\Menu as AdminMenu;
 use Hostinger\Admin\Ajax as AdminAjax;
 use Hostinger\Admin\Redirects as AdminRedirects;
+use Hostinger\Amplitude\Amplitude;
 use Hostinger\Preview\Assets as PreviewAssets;
 use Hostinger\Requests\Client;
 use Hostinger\Admin\Onboarding\Settings as OnboardingSettings;
@@ -39,6 +40,7 @@ class Bootstrap {
 	private function load_dependencies(): void {
 		$this->load_onboarding_dependencies();
 		$this->load_public_dependencies();
+		$this->amplitude_dependencies();
 
 		if ( is_admin() ) {
 			$this->load_admin_dependencies();
@@ -117,5 +119,9 @@ class Bootstrap {
 		if ( ! OnboardingSettings::all_steps_completed() ) {
 			new AutocompleteSteps();
 		}
+	}
+
+	private function amplitude_dependencies(): void {
+			new Amplitude();
 	}
 }

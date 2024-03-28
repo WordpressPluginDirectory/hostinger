@@ -166,20 +166,14 @@ class Helper {
 		return self::PROMOTIONAL_LINKS['en_US'];
 	}
 
-	public function get_domain_from_url(): string {
-		$host = parse_url( get_site_url(), PHP_URL_HOST );
-
-		return $host === false ? self::HPANEL_DOMAIN_URL : $host;
-	}
-
 	public function get_hpanel_domain_url(): string {
-		$domain_url = $this->get_domain_from_url();
+		$parsed_url = parse_url( get_site_url() );
+		$host       = $parsed_url['host'];
+		$host_parts = explode( '.', $host );
+		$subdomain  = ( count( $host_parts ) > 2 ) ? array_shift( $host_parts ) . '.' : '';
+		$domain     = implode( '.', $host_parts );
 
-		if ( $domain_url === self::HPANEL_DOMAIN_URL ) {
-			return $domain_url;
-		}
-
-		return self::HPANEL_DOMAIN_URL . $domain_url;
+		return self::HPANEL_DOMAIN_URL . $domain . ( $subdomain ? "/wordpress/dashboard/$subdomain$domain" : '' );
 	}
 
 	public function check_transient_eligibility( $transient_request_key, $cache_time = 3600 ): bool {
