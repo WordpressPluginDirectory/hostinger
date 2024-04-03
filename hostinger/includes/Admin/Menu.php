@@ -99,13 +99,14 @@ class Menu {
 				'target'  => '_blank',
 			),
 		) );
-
-		$bar->add_menu( array(
-			'id'     => 'create_content_with_ai',
-			'parent' => 'hostinger_admin_bar',
-			'title'  => esc_html__( 'Create content with AI', 'hostinger' ),
-			'href'   => self::AI_ASSISTANT_URL,
-		) );
+		if ( has_action( 'hostinger_ai_assistant_tab_view' ) && current_user_can( 'edit_posts' ) ) {
+			$bar->add_menu( array(
+				'id'     => 'create_content_with_ai',
+				'parent' => 'hostinger_admin_bar',
+				'title'  => esc_html__( 'Create content with AI', 'hostinger' ),
+				'href'   => self::AI_ASSISTANT_URL,
+			) );
+		}
 	}
 
 	public function render(): void {

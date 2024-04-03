@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.5
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -298,3 +298,6 @@ Fixed
 - Improved internal services
 - Added adminbar links to hpanel
 - Fixed hpanel redirect to subdomain
+
+2.1.8 (2024-03-29)
+- Assets compatibility fix

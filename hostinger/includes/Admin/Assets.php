@@ -92,7 +92,7 @@ class Assets {
 					'wp-i18n',
 				),
 				HOSTINGER_VERSION,
-				false
+				array( 'strategy' => 'defer' )
 			);
 			wp_localize_script(
 				'hostinger_requests_scripts',

@@ -10,6 +10,7 @@ import './videos'
 		const navigationItem = $( '.hsr-list__item' );
 		const knowledgeCard = $( '#card-knowledge' );
 		const helpCard = $( '#card-help' );
+		const adminBarGenerateContent = $( '#wp-admin-bar-create_content_with_ai' );
 
 		stepsTitle.on( 'click', function () {
 			$( this ).find( '.hsr-onboarding-step--expand' ).toggleClass( openClass );
@@ -20,6 +21,13 @@ import './videos'
 			$( '.hsr-modal' ).removeClass( 'open' );
 			$( 'body' ).removeClass( 'modal-open' );
 		} )
+
+		adminBarGenerateContent.click( function () {
+			$( '.hsr-list__item' ).removeClass( 'hsr-active' );
+			$('.hts-ai-assistant-tab').addClass( 'hsr-active' );
+			$( '.hsr-tab-content' ).hide();
+			$( ".hsr-tab-content[data-name='ai-assistant']" ).show();
+		} );
 
 		navigationItem.click( function () {
 			let clickedItem = $( this );
