@@ -92,6 +92,10 @@ class Bootstrap {
 				$survey_function = 'customer_csat_survey';
 				break;
 
+			case $surveys->is_prebuild_website_survey_enabled():
+				$survey_function = 'prebuild_website_survey';
+				break;
+
 			case $surveys->is_ai_onboarding_survey_enabled():
 				$survey_function = 'customer_ai_csat_survey';
 				break;

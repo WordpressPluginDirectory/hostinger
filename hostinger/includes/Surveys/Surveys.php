@@ -19,6 +19,7 @@ class Surveys {
 	public const WOO_SURVEY_IDENTIFIER                 = 'wordpress_woocommerce_onboarding';
 	public const AI_ONBOARDING_SURVEY_IDENTIFIER       = 'wordpress_ai_onboarding';
 	public const AFFILIATE_SURVEY_IDENTIFIER           = 'wordpress_amazon_affiliate';
+	public const PREBUILD_WEBSITE_SURVEY_IDENTIFIER    = 'wordpress_prebuild_website';
 	public const SUBMITTED_SURVEY_TRANSIENT            = 'submitted_survey_transient';
 	public const SURVEY_QUESTIONS_TRANSIENT_REQUEST    = 'survey_questions_transient_request';
 	public const SURVEY_QUESTIONS_TRANSIENT_RESPONSE   = 'survey_questions_transient_response';
@@ -169,6 +170,25 @@ class Surveys {
 		return $not_submitted && $not_completed && $affiliate_links_exsists && $is_client_eligible;
 	}
 
+	public function is_prebuild_website_survey_enabled(): bool {
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return false;
+		}
+
+		$not_submitted           = ! get_transient( self::SUBMITTED_SURVEY_TRANSIENT );
+		$not_completed           = ! $this->settings->get_setting( 'prebuild_website_survey_completed' );
+		$is_hostinger_admin_page = $this->helper->is_hostinger_admin_page();
+		$is_client_eligible      = $this->is_client_eligible();
+		$astra_templates_active  = $this->helper->is_plugin_active( 'astra-sites' );
+
+		if ( ! $is_hostinger_admin_page || empty( $this->get_survey_questions() ) ) {
+			return false;
+		}
+
+		return $not_submitted && $not_completed && $is_client_eligible && $astra_templates_active;
+	}
+
 	public function is_client_eligible(): bool {
 		$transient_request_key  = self::IS_CLIENT_ELIGIBLE_TRANSIENT_REQUEST;
 		$transient_response_key = self::IS_CLIENT_ELIGIBLE_TRANSIENT_RESPONSE;
@@ -279,6 +299,14 @@ class Surveys {
 					$setting_key = 'ai_onboarding_survey_completed';
 					break;
 
+				case 'prebuild_website_survey':
+					$setting_key = 'prebuild_website_survey_completed';
+					break;
+
+				case 'affiliate_plugin_survey':
+					$setting_key = 'affiliate_survey_completed';
+					break;
+
 				default:
 					$setting_key = 'feedback_survey_completed';
 			}
@@ -316,6 +344,10 @@ class Surveys {
 			switch ( $survey_type ) {
 				case 'woo_survey':
 					$title = $this->survey_questions->map_survey_questions( $question['slug'] )['woo_question'];
+					break;
+
+				case 'prebuild_website_survey':
+					$title = $this->survey_questions->map_survey_questions( $question['slug'] )['prebuild_website_question'];
 					break;
 
 				case 'ai_onboarding_survey':
@@ -441,6 +473,14 @@ class Surveys {
 		}
 	}
 
+	public function prebuild_website_survey(): void {
+		if ( ! did_action( 'prebuild_website_plugin_survey' ) ) {
+			$survey_html = $this->generate_survey_html( 'hts-prebuild-website-csat' );
+			echo $survey_html;
+			do_action( 'prebuild_website_plugin_survey' );
+		}
+	}
+
 	private function extract_between_values( string $rule, int $position ): array {
 		$between_prefix_length = strlen( 'between:' );
 		$between_values        = explode( ',', substr( $rule, $position + $between_prefix_length ) );
@@ -476,6 +516,13 @@ class Surveys {
 					array(
 						'question_slug' => self::LOCATION_SLUG,
 						'answer'        => self::AFFILIATE_SURVEY_IDENTIFIER,
+					),
+				);
+			case 'prebuild_website_survey':
+				return array(
+					array(
+						'question_slug' => self::LOCATION_SLUG,
+						'answer'        => self::PREBUILD_WEBSITE_SURVEY_IDENTIFIER,
 					),
 				);
 			default:

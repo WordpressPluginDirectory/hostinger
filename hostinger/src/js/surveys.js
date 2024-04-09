@@ -17,6 +17,10 @@ import * as Survey from 'survey-jquery'
 			type = 'affiliate_plugin_survey';
 		}
 
+		if ( surveyWrapper.hasClass( 'hts-prebuild-website-csat' ) ) {
+			type = 'prebuild_website_survey';
+		}
+
 		// Check if the cookie already exists
 		function checkCookie() {
 			var match = document.cookie.match(/(?:^|;)\s*HtsSkipSurvey\s*=\s*([^;]*)/);
