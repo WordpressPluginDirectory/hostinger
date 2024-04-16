@@ -59,7 +59,6 @@ class Bootstrap {
 	}
 
 	private function set_locale() {
-
 		$plugin_i18n = new I18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -117,6 +116,7 @@ class Bootstrap {
 
 	private function load_public_dependencies(): void {
 		new PreviewAssets();
+		new Hooks();
 	}
 
 	private function load_onboarding_dependencies(): void {
