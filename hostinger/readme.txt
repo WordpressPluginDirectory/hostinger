@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,3 +310,6 @@ Fixed
 
 2.2.1 (2024-04-16)
 - Fixed loading issues
+
+2.2.2 (2024-04-17)
+- "Omnisend" authentication fix
