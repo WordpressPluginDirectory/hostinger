@@ -73,7 +73,7 @@ class Surveys {
 
 		$current_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( defined( 'DOING_AJAX' ) && \DOING_AJAX ) {
 			return false;
 		}
 

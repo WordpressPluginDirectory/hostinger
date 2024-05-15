@@ -3,7 +3,7 @@
         'name' => 'hostinger/hostinger',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'ff32119ecdc581fd25c2cf1b9881120a8042f7e5',
+        'reference' => '2a30111dfb9a7504599ad748739bf2367fcd2028',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'hostinger/hostinger' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ff32119ecdc581fd25c2cf1b9881120a8042f7e5',
+            'reference' => '2a30111dfb9a7504599ad748739bf2367fcd2028',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

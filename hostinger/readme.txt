@@ -3,7 +3,7 @@ Tags: onboarding, hostinger
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -316,3 +316,6 @@ Fixed
 
 2.2.3 (2024-05-08)
 - Increased minimum PHP version
+
+2.2.4 (2024-05-13)
+- Update prebuild websites
