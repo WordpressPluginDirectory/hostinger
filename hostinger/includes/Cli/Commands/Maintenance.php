@@ -2,6 +2,7 @@
 
 namespace Hostinger\Cli\Commands;
 
+use Hostinger\Admin\PluginSettings;
 use WP_CLI;
 use Hostinger\Settings;
 
@@ -15,21 +16,14 @@ class Maintenance {
 		}
 	}
 
-	/**
-	 * Command allows enable/disable maintenance mode.
-	 *
-	 * ## EXAMPLES
-	 *
-	 *     # Enable maintenance mode
-	 *     $ wp hostinger maintenance mode 1
-	 *
-	 *     # Disable maintenance mode
-	 *     $ wp hostinger maintenance mode 0
-	 *
-	 * @param array $args WP-CLI positional arguments.
-	 *
-	 * @throws \Exception If pass bad argument.
-	 */
+    /**
+     * Command allows enable/disable maintenance mode.
+     *
+     * @param array $args
+     *
+     * @return void
+     * @throws \Exception
+     */
 	public function mode( array $args ): void {
 		if ( empty( $args ) ) {
 			WP_CLI::error( 'Arguments cannot be empty. Use 0 or 1' );
@@ -39,37 +33,40 @@ class Maintenance {
 			do_action( 'litespeed_purge_all' );
 		}
 
+        $plugin_settings = new PluginSettings();
+        $plugin_options = $plugin_settings->get_plugin_settings();
+
 		switch ( $args[0] ) {
 			case '1':
-				Settings::update_setting( 'maintenance_mode', 1 );
+                $plugin_options->set_maintenance_mode(true);
 				WP_CLI::success( 'Maintenance mode ENABLED' );
 				break;
 			case '0':
-				Settings::update_setting( 'maintenance_mode', 0 );
+                $plugin_options->set_maintenance_mode(false);
 				WP_CLI::success( 'Maintenance mode DISABLED' );
 				break;
 			default:
 				throw new \Exception( 'Invalid maintenance mode value' );
 		}
+
+        $plugin_settings->save_plugin_settings( $plugin_options );
 	}
 
-	/**
-	 * Command return maintenance mode status.
-	 *
-	 * ## EXAMPLES
-	 *
-	 *     # Get maintenance mode status
-	 *     $ wp hostinger maintenance status
-	 */
-	public function status(): bool {
-		$status = get_option( 'hostinger_maintenance_mode', 0 );
+    /**
+     * Command return maintenance mode status.
+     *
+     * @return bool
+     */
+    public function status(): bool {
+        $plugin_settings = new PluginSettings();
+        $plugin_options = $plugin_settings->get_plugin_settings();
 
-		if ( $status ) {
-			WP_CLI::success( 'Maintenance mode ENABLED' );
-		} else {
-			WP_CLI::success( 'Maintenance mode DISABLED' );
-		}
+        if ( $plugin_options->get_maintenance_mode() ) {
+            WP_CLI::success( 'Maintenance mode ENABLED' );
+        } else {
+            WP_CLI::success( 'Maintenance mode DISABLED' );
+        }
 
-		return (bool) $status;
-	}
+        return (bool)$plugin_options->get_maintenance_mode();
+    }
 }

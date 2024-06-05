@@ -32,7 +32,7 @@
 					fill="#673DE6"/>
 		</svg>
 	</div>
-	<p class="hsr-promotional-banner-description">
+	<p>
 		<?php
 		echo wp_kses(
 			__(

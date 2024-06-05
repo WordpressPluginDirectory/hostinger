@@ -6,5 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Hostinger\\WpMenuManager\\' => array($vendorDir . '/hostinger/hostinger-wp-menu-manager/src'),
+    'Hostinger\\WpHelper\\' => array($vendorDir . '/hostinger/hostinger-wp-helper/src'),
+    'Hostinger\\Tests\\' => array($vendorDir . '/hostinger/hostinger-wp-helper/tests/phpunit'),
     'Hostinger\\' => array($baseDir . '/includes'),
 );

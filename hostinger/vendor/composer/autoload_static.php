@@ -4,16 +4,31 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5f92b01574e2f767c25a64ff6da703df
+class ComposerStaticInit0e3e16b2093bc1815df2ffb9e0b7615e
 {
     public static $prefixLengthsPsr4 = array (
         'H' => 
         array (
+            'Hostinger\\WpMenuManager\\' => 24,
+            'Hostinger\\WpHelper\\' => 19,
+            'Hostinger\\Tests\\' => 16,
             'Hostinger\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Hostinger\\WpMenuManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hostinger/hostinger-wp-menu-manager/src',
+        ),
+        'Hostinger\\WpHelper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hostinger/hostinger-wp-helper/src',
+        ),
+        'Hostinger\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hostinger/hostinger-wp-helper/tests/phpunit',
+        ),
         'Hostinger\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
@@ -27,9 +42,9 @@ class ComposerStaticInit5f92b01574e2f767c25a64ff6da703df
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5f92b01574e2f767c25a64ff6da703df::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5f92b01574e2f767c25a64ff6da703df::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5f92b01574e2f767c25a64ff6da703df::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0e3e16b2093bc1815df2ffb9e0b7615e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0e3e16b2093bc1815df2ffb9e0b7615e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0e3e16b2093bc1815df2ffb9e0b7615e::$classMap;
 
         }, null, ClassLoader::class);
     }

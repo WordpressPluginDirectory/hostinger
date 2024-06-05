@@ -3,168 +3,61 @@
 namespace Hostinger\Admin;
 
 use Hostinger\Helper;
+use Hostinger\WpHelper\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
 class Hooks {
-
+    /**
+     * @var Helper
+     */
 	private Helper $helper;
+
+    /**
+     * @var Utils
+     */
+    private Utils $utils;
 
 	public function __construct() {
 		$this->helper = new Helper();
+        $this->utils = new Utils();
 		add_action( 'admin_footer', array( $this, 'rate_plugin' ) );
-		add_action( 'admin_init', array( $this, 'hide_astra_builder_selection_screen' ) );
-		add_action( 'admin_init', array( $this, 'enable_woo_onboarding' ) );
-		add_action( 'admin_notices', array( $this, 'omnisend_discount_notice' ) );
-		add_filter( 'woocommerce_prevent_automatic_wizard_redirect', '__return_true' );
-
-		if ( ! Helper::show_woocommerce_onboarding() ) {
-			add_filter( 'admin_body_class', array( $this, 'add_woocommerce_onboarding_class' ) );
-		}
-
-		add_action( 'admin_init', array( $this, 'store_ready_message_logic' ), 0 );
-		add_action( 'admin_notices', array( $this, 'show_store_ready_message' ), 0 );
-		add_action( 'admin_head', array( $this, 'force_woo_notices' ) );
+		add_action( 'admin_init', array( $this, 'message_about_plugin_split' ) );
 	}
 
-	public function enable_woo_onboarding(): bool {
-
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return false;
-		}
-
-		if ( ! $this->helper->is_hostinger_admin_page() || ! $this->helper->is_woocommerce_site() ) {
-			return false;
-		}
-
-		$woocommerce_onboarding_profile = get_option( 'woocommerce_onboarding_profile', null );
-
-		// WooCommerce onboarding already done (skipped).
-		if ( ! empty( $woocommerce_onboarding_profile['skipped'] ) ) {
-			return false;
-		}
-
-		// WooCommerce onboarding already done (completed).
-		if ( ! empty( $woocommerce_onboarding_profile['completed'] ) ) {
-			return false;
-		}
-
-		$woo_onboarding_enabled = get_option( 'hostinger_woo_onboarding_enabled', null );
-
-		if ( $woo_onboarding_enabled === null && get_option( 'hts_new_installation', false ) === 'new' ) {
-			update_option( 'hostinger_woo_onboarding_enabled', true, false );
-			update_option( 'hts_new_installation', 'old' );
-		}
-
-		return true;
-	}
-
+    /**
+     * @return void
+     */
 	public function rate_plugin(): void {
-		$promotional_banner_hidden = get_transient( 'hts_hide_promotional_banner_transient' );
-		$two_hours_in_seconds      = 7200;
+        if ( !$this->utils->isThisPage('wp-admin/admin.php?page=' . Menu::MENU_SLUG) ) {
+            return;
+        }
 
-		if ( $promotional_banner_hidden && time() > $promotional_banner_hidden + $two_hours_in_seconds ) {
-			require_once HOSTINGER_ABSPATH . 'includes/Admin/Views/Partials/RateUs.php';
+        require_once HOSTINGER_ABSPATH . 'includes/Admin/Views/Partials/RateUs.php';
+	}
+
+	public function message_about_plugin_split(): void {
+		$plugin_split_notice_hidden = get_transient( 'hts_plugin_split_notice_hidden' );
+		if ( $plugin_split_notice_hidden === false & version_compare( HOSTINGER_VERSION, '3.0.0', '>=' ) ) {
+			if ( !$this->utils->isPluginActive( 'hostinger-easy-onboarding' ) ) {
+				add_action( 'admin_notices', array( $this, 'custom_admin_notice' ) );
+			}
 		}
 	}
 
-	public function omnisend_discount_notice(): void {
-		$omnisend_notice_hidden = get_transient( 'hts_omnisend_notice_hidden' );
-
-		if ( $omnisend_notice_hidden === false && ( $this->helper->is_this_page( '/wp-admin/admin.php?page=omnisend' ) ) && ( Helper::is_plugin_active( 'class-omnisend-core-bootstrap' ) || Helper::is_plugin_active( 'omnisend-woocommerce' ) ) ) : ?>
-			<div class="notice notice-info hts-admin-notice hts-omnisend">
-				<p><?php echo wp_kses( __( 'Use the special discount code <b>ONLYHOSTINGER30</b> to get 30% off on Omnisend for 6 months when you upgrade.', 'hostinger' ), array( 'b' => array() ) ); ?></p>
-				<div>
-					<a class="button button-primary"
-					   href="https://your.omnisend.com/LXqyZ0"
-					   target="_blank"><?= esc_html__( 'Get Discount', 'hostinger' ); ?></a>
-					<button type="button" class="notice-dismiss"></button>
-				</div>
-			</div>
-		<?php endif;
-		wp_nonce_field( 'hts_close_omnisend', 'hts_close_omnisend_nonce', true );
-	}
-
-	public function hide_astra_builder_selection_screen(): void {
-		add_filter( 'st_enable_block_page_builder', '__return_true' );
-	}
-
-	/**
-	 *
-	 * @param string $classes
-	 *
-	 * @return string
-	 */
-	public function add_woocommerce_onboarding_class( string $classes ): string {
-
-		$classes .= ' hostinger-woocommerce-onboarding-page';
-
-		return $classes;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function store_ready_message_logic(): bool {
-		if ( ! Helper::is_woocommerce_site() || ! Helper::woocommerce_onboarding_choice() ) {
-			return false;
-		}
-
-		if ( isset( $_GET['hide-store-notice'] ) ) {
-			update_option( 'hostinger_woo_ready_message_shown', 1 );
-
-			return false;
-		}
-
-		return false;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function show_store_ready_message(): string {
-		if ( ! $this->helper->can_show_store_ready_message() ) {
-			return '';
-		}
-
+	public function custom_admin_notice() {
 		?>
-		<div class="notice notice-hst">
-			<h3>
-				<?php echo esc_html__( 'Your store is ready!', 'hostinger' ); ?>
-			</h3>
-			<p><?php echo esc_html__( 'One more step to reach your online success. Finalize the visual and technical aspects of your website using our recommendations checklist.', 'hostinger' ); ?></p>
-			<p>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=hostinger&hide-store-notice' ) ); ?>"
-					class="components-button is-primary"><?php echo esc_html__( 'Visit Hostinger plugin', 'hostinger' ); ?></a>
-				<a href="<?php echo esc_url( home_url() ); ?>"
-					target="_blank"
-					class="components-button is-secondary"><?php echo esc_html__( 'Preview store', 'hostinger' ); ?></a>
-			</p>
+		<div id="hostinger-plugin-split-notice" class="hts-plugin-split notice is-dismissible">
+			<h2><?php echo esc_html__('Hostinger plugin updates', 'hostinger'); ?></h2>
+			<p><?php echo esc_html__('The Hostinger plugin has been split into two different plugins:', 'hostinger'); ?></p>
+            <ul>
+                <li><strong><?php echo esc_html__('Hostinger Tools', 'hostinger'); ?></strong> <?php echo esc_html__('offers a toolkit for easier site maintenance.', 'hostinger'); ?></li>
+                <li><strong><?php echo esc_html__('Hostinger Easy Onboarding', 'hostinger'); ?></strong> <?php echo esc_html__('provides guidance and learning resources for beginners to get started with building a site using WordPress.', 'hostinger'); ?></li>
+            </ul>
+			<button id="plugin-split-close" type="button" class="plugin-split-close notice-dismiss"><?php echo esc_html__('Got it', 'hostinger'); ?></button>
 		</div>
 		<?php
-
-		return '';
+		wp_nonce_field( 'hts_close_plugin_split', 'hts_close_plugin_split_nonce', true );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function force_woo_notices(): string {
-		if ( ! $this->helper->can_show_store_ready_message() ) {
-			return '';
-		}
-		?>
-		<style type="text/css">
-			.woocommerce-layout__notice-list-hide {
-				display: block !important;
-			}
-
-			.notice-hst {
-				border-left-color: #673DE6;
-			}
-		</style>
-		<?php
-
-		return '';
-	}
 }

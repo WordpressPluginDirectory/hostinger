@@ -249,6 +249,21 @@ class Helper {
 		return empty( array_diff( $required_completed_actions, $completed_actions ) );
 	}
 
+    /**
+     * @return void
+     */
+    public static function generate_bypass_code( $length ) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $code = '';
+        $maxIndex = strlen($characters) - 1;
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = mt_rand(0, $maxIndex);
+            $code .= $characters[$randomIndex];
+        }
+
+        return $code;
+    }
 }
 
 $hostinger_helper = new Helper();

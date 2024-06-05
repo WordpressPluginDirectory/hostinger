@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Hostinger
+ * Plugin Name: Hostinger Tools
  * Plugin URI: https://hostinger.com
  * Description: Hostinger WordPress plugin.
- * Version: 2.2.4
+ * Version: 3.0.0
  * Requires at least: 5.5
  * Requires PHP: 8.0
  * Author: Hostinger
@@ -19,11 +19,12 @@
 use Hostinger\Hostinger;
 use Hostinger\Activator;
 use Hostinger\Deactivator;
+use Hostinger\WpMenuManager\Manager;
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! defined( 'HOSTINGER_VERSION' ) ) {
-	define( 'HOSTINGER_VERSION', '2.2.4' );
+	define( 'HOSTINGER_VERSION', '3.0.0' );
 }
 
 if ( ! defined( 'HOSTINGER_ABSPATH' ) ) {
@@ -39,7 +40,11 @@ if ( ! defined( 'HOSTINGER_PLUGIN_URL' ) ) {
 }
 
 if ( ! defined( 'HOSTINGER_ASSETS_URL' ) ) {
-	define( 'HOSTINGER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets' );
+    define( 'HOSTINGER_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets/' );
+}
+
+if ( ! defined( 'HOSTINGER_VUE_ASSETS_URL' ) ) {
+	define( 'HOSTINGER_VUE_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'vue-frontend/dist' );
 }
 
 if ( ! defined( 'HOSTINGER_WP_CONFIG_PATH' ) ) {
@@ -54,6 +59,39 @@ if ( ! defined( 'HOSTINGER_WP_TOKEN' ) ) {
 
 if ( ! defined( 'HOSTINGER_REST_URI' ) ) {
 	define( 'HOSTINGER_REST_URI', 'https://rest-hosting.hostinger.com' );
+}
+
+if ( ! defined( 'HOSTINGER_PLUGIN_SETTINGS_OPTION' ) ) {
+	define( 'HOSTINGER_PLUGIN_SETTINGS_OPTION', 'hostinger_tools' );
+}
+
+if ( ! defined( 'HOSTINGER_PLUGIN_REST_API_BASE' ) ) {
+    define( 'HOSTINGER_PLUGIN_REST_API_BASE', 'hostinger-tools-plugin/v1' );
+}
+
+if ( ! defined( 'HOSTINGER_PLUGIN_MINIMUM_PHP_VERSION' ) ) {
+    define( 'HOSTINGER_PLUGIN_MINIMUM_PHP_VERSION', '8.0' );
+}
+
+if ( ! version_compare( phpversion(), HOSTINGER_PLUGIN_MINIMUM_PHP_VERSION, '>=' ) ) {
+
+    add_action( 'admin_notices', function() {
+        ?>
+        <div class="notice notice-error is-dismissible hts-theme-settings">
+            <p>
+                <?php /* translators: %s: PHP version */ ?>
+                <strong><?php echo __( 'Attention:', 'hostinger' ); ?></strong> <?php echo sprintf( __( 'The Hostinger plugin requires minimum PHP version of <b>%s</b>. ', 'hostinger' ), HOSTINGER_PLUGIN_MINIMUM_PHP_VERSION ); ?>
+            </p>
+            <p>
+                <?php /* translators: %s: PHP version */ ?>
+                <?php echo sprintf( __( 'You are running <b>%s</b> PHP version.', 'hostinger' ), phpversion() ); ?>
+            </p>
+        </div>
+        <?php
+        }
+    );
+
+    return;
 }
 
 $vendor_file = __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -79,6 +117,17 @@ function hostinger_deactivate(): void {
 register_activation_hook( __FILE__, 'hostinger_activate' );
 register_deactivation_hook( __FILE__, 'hostinger_deactivate' );
 
+if( !function_exists('hostinger_load_menus') ) {
+    function hostinger_load_menus(): void
+    {
+        $manager = Manager::getInstance();
+        $manager->boot();
+    }
+}
+
+if ( ! has_action( 'plugins_loaded', 'hostinger_load_menus' ) ) {
+    add_action('plugins_loaded', 'hostinger_load_menus');
+}
 
 $hostinger = new Hostinger();
 $hostinger->run();

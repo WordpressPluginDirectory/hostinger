@@ -2,39 +2,82 @@
 
 namespace Hostinger;
 
+use Hostinger\Admin\PluginSettings;
+use Hostinger\WpHelper\Utils;
+
 defined( 'ABSPATH' ) || exit;
 
 class Hooks {
-
 	public function __construct() {
-		add_action( 'init', array( $this, 'check_url_and_flush_rules' ) );
+        // XMLRpc / Force SSL
+        add_filter( 'xmlrpc_enabled', array( $this, 'check_xmlrpc_enabled' ) );
+        add_filter( 'wp_headers', array( $this, 'check_pingback' ));
+        add_filter( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 	}
 
-	public function check_url_and_flush_rules() {
-		if ( defined( 'DOING_AJAX' ) && \DOING_AJAX ) {
-			return false;
-		}
+    /**
+     * @return void
+     */
+    public function plugins_loaded() {
+        $utils = new Utils();
+        $plugin_settings = new PluginSettings();
+        $settings = $plugin_settings->get_plugin_settings();
 
-		$current_url    = home_url( add_query_arg( null, null ) );
-		$url_components = wp_parse_url( $current_url );
+        if ( defined( 'WP_CLI' ) && WP_CLI ) {
+            return;
+        }
 
-		if ( isset( $url_components['query'] ) ) {
-			parse_str( $url_components['query'], $params );
+        // Xmlrpc.
+        if($settings->get_disable_xml_rpc() && $utils->isThisPage('xmlrpc.php')) {
+            exit('Disabled');
+        }
 
-			if ( isset( $params['app_name'] ) ) {
-				$app_name = sanitize_text_field( $params['app_name'] );
+        // SSL redirect.
+        if($settings->get_force_https() && !is_ssl()) {
+            $host = $_SERVER['HTTP_HOST'];
 
-				if ( $app_name === 'Omnisend App' ) {
-					if ( function_exists( 'flush_rewrite_rules' ) ) {
-						flush_rewrite_rules();
-					}
+            if ($settings->get_force_www() && strpos($_SERVER['HTTP_HOST'], 'www.') === false) {
+                $host = 'www.'.$host;
+            }
 
-					if ( has_action( 'litespeed_purge_all' ) ) {
-						do_action( 'litespeed_purge_all' );
-					}
-				}
-			}
-		}
-	}
+            wp_redirect('https://' . $host . $_SERVER['REQUEST_URI'], 301);
+            exit();
+        }
 
+        // Force www.
+        if ($settings->get_force_www() && strpos($_SERVER['HTTP_HOST'], 'www.') === false) {
+            wp_redirect('https://www.' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301);
+            exit;
+        }
+    }
+
+    /**
+     * @param $headers
+     *
+     * @return mixed
+     */
+    public function check_pingback( $headers ) {
+        $plugin_settings = new PluginSettings();
+        $settings = $plugin_settings->get_plugin_settings();
+
+        if($settings->get_disable_xml_rpc()) {
+            unset($headers['X-Pingback']);
+        }
+
+        return $headers;
+    }
+
+    /**
+     * @return bool
+     */
+    public function check_xmlrpc_enabled(): bool {
+        $plugin_settings = new PluginSettings();
+        $settings = $plugin_settings->get_plugin_settings();
+
+        if($settings->get_disable_xml_rpc()) {
+            return false;
+        }
+
+        return true;
+    }
 }

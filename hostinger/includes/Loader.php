@@ -13,15 +13,42 @@ class Loader {
 		$this->filters = array();
 	}
 
+    /**
+     * @param string $hook
+     * @param        $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
+     *
+     * @return void
+     */
 	public function add_action( string $hook, $component, string $callback, int $priority = 10, int $accepted_args = 1 ) {
 		$this->actions = $this->add( $this->actions, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
+    /**
+     * @param string $hook
+     * @param        $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
+     *
+     * @return void
+     */
 	public function add_filter( string $hook, $component, string $callback, int $priority = 10, int $accepted_args = 1 ) {
 		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
-
+    /**
+     * @param array  $hooks
+     * @param string $hook
+     * @param        $component
+     * @param string $callback
+     * @param int    $priority
+     * @param int    $accepted_args
+     *
+     * @return array
+     */
 	private function add(
 		array $hooks,
 		string $hook,
