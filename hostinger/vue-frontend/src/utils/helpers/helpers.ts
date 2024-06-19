@@ -2,6 +2,7 @@ import { toUnicode as punyUnicode } from "punycode";
 import { AxiosResponse } from "axios";
 import { toast } from "vue3-toastify";
 import { ResponseError, BaseResponse } from "@/types";
+import { useGeneralStoreData } from "@/stores";
 
 /**
  * Converts a string to Unicode using Punycode encoding.
@@ -12,16 +13,14 @@ import { ResponseError, BaseResponse } from "@/types";
  */
 export const toUnicode = (str: string) => (str ? punyUnicode(str) : str);
 
-
-
 /**
  * Converts the first character of a word to uppercase and returns the modified word.
  * If the word is an empty string, an empty string is returned.
- * 
+ *
  * @param word - The word to convert to title case.
  * @returns The word with the first character in uppercase.
  */
-export const toTitleCase = (word: string = '') =>
+export const toTitleCase = (word: string = "") =>
   word.charAt(0).toUpperCase() + word.slice(1);
 
 /**
@@ -103,8 +102,9 @@ export async function asyncCall<T>(
  * @returns The URL of the asset.
  */
 export const getAssetSource = (path: string) => {
+  const { pluginUrl } = useGeneralStoreData();
   // @ts-ignore
-  return `${hostinger_tools_data.plugin_url}vue-frontend/src/assets/${path}`;
+  return `${pluginUrl}vue-frontend/src/assets/${path}`;
 };
 
 /**

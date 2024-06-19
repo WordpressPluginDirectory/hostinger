@@ -2,7 +2,7 @@
 import SectionCard from "@/components/HostingerTools/SectionCard.vue";
 import { useModal } from "@/composables";
 import { SectionItem, ModalName, ToggleableSettingsData } from "@/types";
-import { useSettingsStore } from "@/stores";
+import { useSettingsStore, useGeneralStoreData } from "@/stores";
 import {
   getAssetSource,
   isNewerVerison,
@@ -19,8 +19,11 @@ const { fetchSettingsData, updateSettingsData, regenerateByPassCode } =
   useSettingsStore();
 
 const { settingsData } = storeToRefs(useSettingsStore());
+const { homeUrl, siteUrl } = useGeneralStoreData();
 
 const WORDPRESS_UPDATE_LINK = getBaseUrl(location.href) + "update-core.php";
+
+const isPageLoading = ref(false);
 
 const maintenanceSection = computed(() => [
   {
@@ -53,7 +56,7 @@ const maintenanceSection = computed(() => [
     copyLink:
       settingsData.value?.bypassCode &&
       // @ts-ignore
-      `${hostinger_tools_data.site_url}/?bypass_code=${settingsData.value.bypassCode}`,
+      `${siteUrl}/?bypass_code=${settingsData.value.bypassCode}`,
   },
 ]);
 
@@ -68,25 +71,27 @@ const securitySection = computed(() => [
 ]);
 
 const redirectsSection = computed(() => {
-    let sections = [
-        {
-            id: "force-https",
-            title: translate("hostinger_tools_force_https"),
-            description: translate("hostinger_tools_force_https_description"),
-            isToggleDisplayed: true,
-            toggleValue: settingsData.value?.forceHttps,
-        }
-    ];
+  let sections = [
+    {
+      id: "force-https",
+      title: translate("hostinger_tools_force_https"),
+      description: translate("hostinger_tools_force_https_description"),
+      isToggleDisplayed: true,
+      toggleValue: settingsData.value?.forceHttps,
+    },
+  ];
 
-    sections.push({
-        id: "force-www",
-        title: translate("hostinger_tools_force_www"),
-        description: (!settingsData.value?.isEligibleWwwRedirect) ? translate("hostinger_tools_force_www_description_not_available") : translate("hostinger_tools_force_www_description"),
-        isToggleDisplayed: (settingsData.value?.isEligibleWwwRedirect),
-        toggleValue: settingsData.value?.forceWww,
-    });
+  sections.push({
+    id: "force-www",
+    title: translate("hostinger_tools_force_www"),
+    description: !settingsData.value?.isEligibleWwwRedirect
+      ? translate("hostinger_tools_force_www_description_not_available")
+      : translate("hostinger_tools_force_www_description"),
+    isToggleDisplayed: !!settingsData.value?.isEligibleWwwRedirect,
+    toggleValue: settingsData.value?.forceWww,
+  });
 
-    return sections;
+  return sections;
 });
 
 const { openModal } = useModal();
@@ -124,7 +129,10 @@ const phpVersionCard = computed(() => ({
     ? {
         text: `${translate("hostinger_tools_update_to")} 8.1`,
         onClick: () => {
-            window.open(`https://auth.hostinger.com/login?r=/section/php-configuration/domain/${location.host}`, '_blank');
+          window.open(
+            `https://auth.hostinger.com/login?r=/section/php-configuration/domain/${location.host}`,
+            "_blank"
+          );
         },
       }
     : undefined,
@@ -181,10 +189,14 @@ const onUpdateSettings = (value: boolean, item: SectionItem) => {
   updateSettingsData(settingsData.value);
 };
 
-const toolsData = ref(hostinger_tools_data);
+const goToPreviewWebsite = () => {
+  window.open(homeUrl, "_blank");
+};
 
-(() => {
-  fetchSettingsData();
+(async () => {
+  isPageLoading.value = true;
+  await fetchSettingsData();
+  isPageLoading.value = false;
 })();
 </script>
 
@@ -192,24 +204,31 @@ const toolsData = ref(hostinger_tools_data);
   <div v-if="settingsData">
     <OverheadButton
       :text="translate('hostinger_tools_preview_my_website')"
-      :action="() => { window.open(toolsData.home_url, '_blank') }"
+      :action="goToPreviewWebsite"
     />
     <div class="hostinger-tools__tool-version-cards">
-      <ToolVersionCard v-bind="wordPressVersionCard" class="h-mr-16" />
-      <ToolVersionCard v-bind="phpVersionCard" />
+      <ToolVersionCard
+        :is-loading="isPageLoading"
+        v-bind="wordPressVersionCard"
+        class="h-mr-16"
+      />
+      <ToolVersionCard :is-loading="isPageLoading" v-bind="phpVersionCard" />
     </div>
     <div>
       <SectionCard
+        :is-loading="isPageLoading"
         @save-section="onSaveSection"
         :title="translate('hostinger_tools_maintenance')"
         :section-items="maintenanceSection"
       />
       <SectionCard
+        :is-loading="isPageLoading"
         @save-section="onSaveSection"
         :title="translate('hostinger_tools_security')"
         :section-items="securitySection"
       />
       <SectionCard
+        :is-loading="isPageLoading"
         @save-section="onSaveSection"
         :title="translate('hostinger_tools_redirects')"
         :section-items="redirectsSection"

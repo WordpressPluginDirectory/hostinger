@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import { useButton } from "@/composables/useButton";
-import CircleLoader from "@/components/CircleLoader.vue";
+import CircleLoader from "@/components/Loaders/CircleLoader.vue";
 import Icon from "@/components/Icon/Icon.vue";
 import type { IButtonProps } from "@/types";
 

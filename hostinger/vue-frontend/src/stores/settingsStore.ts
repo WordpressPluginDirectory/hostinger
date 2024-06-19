@@ -34,7 +34,7 @@ export const useSettingsStore = defineStore(
         currentWpVersion: tempSettingsData?.currentWpVersion || "",
         phpVersion: tempSettingsData?.phpVersion || "",
         newestWpVersion: tempSettingsData?.newestWpVersion || "",
-        isEligibleWwwRedirect: tempSettingsData?.isEligibleWwwRedirect || "",
+        isEligibleWwwRedirect: tempSettingsData?.isEligibleWwwRedirect || false,
       };
     };
 
@@ -50,7 +50,7 @@ export const useSettingsStore = defineStore(
         currentWpVersion: tempSettingsData?.currentWpVersion || "",
         phpVersion: tempSettingsData?.phpVersion || "",
         newestWpVersion: tempSettingsData?.newestWpVersion || "",
-        isEligibleWwwRedirect: tempSettingsData?.isEligibleWwwRedirect || "",
+        isEligibleWwwRedirect: tempSettingsData?.isEligibleWwwRedirect || false,
       };
     };
     return {
@@ -61,6 +61,6 @@ export const useSettingsStore = defineStore(
     };
   },
   {
-    persist: { key: STORE_PERSISTENT_KEYS.GENERAL_DATA_STORE },
+    persist: { key: STORE_PERSISTENT_KEYS.SETTINGS_STORE },
   }
 );

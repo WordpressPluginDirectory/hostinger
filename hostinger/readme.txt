@@ -1,9 +1,10 @@
 === Hostinger Tools ===
 Tags: hostinger, tools, maintenance, security, redirects, https, xml-rpc
 Requires at least: 5.5
+Version: 3.0.1
 Tested up to: 6.5
 Requires PHP: 8.0
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -350,3 +351,7 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 - Added ability to enable/disable XML-RPC
 - Added ability to force redirects to HTTPS and WWW URLs
 - Moved Onboarding steps and Learning section to separate plugin Hostinger Easy Onboarding
+
+3.0.1 (2024-06-06)
+- Added skeleton loader for UI
+- Removed hPanel links from admin bar menu

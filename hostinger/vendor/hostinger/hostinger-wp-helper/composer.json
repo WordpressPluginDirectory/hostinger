@@ -3,10 +3,10 @@
 	"description": "A PHP package with core functions for Hostinger WordPress plugins.",
 	"type": "library",
 	"require": {
-		"php": ">=7.4",
+		"php": ">=8.0",
 		"ext-json": "*"
     },
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"autoload": {
 		"psr-4": {
 			"Hostinger\\WpHelper\\": "src/",

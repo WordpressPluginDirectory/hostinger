@@ -4,9 +4,11 @@ import Toggle from "@/components/Toggle.vue";
 import CopyField from "@/components/CopyField.vue";
 import { SectionItem } from "@/types";
 import Button from "@/components/Button/Button.vue";
+import SkeletonLoader from "@/components/Loaders/SkeletonLoader.vue";
 
 type Props = {
   title: string;
+  isLoading?: boolean;
   sectionItems: SectionItem[];
 };
 
@@ -20,7 +22,17 @@ const emit = defineEmits<Emits>();
 
 <template>
   <div class="home-section">
-    <Card :header="props.title">
+    <Card v-if="isLoading">
+      <SkeletonLoader class="h-mb-24" width="50%" :height="24" rounded />
+      <SkeletonLoader
+        v-for="(item, index) in sectionItems"
+        :class="{ 'h-mb-24': index !== sectionItems.length - 1 }"
+        width="100%"
+        :height="item.copyLink ? 48 : 24"
+        rounded
+      />
+    </Card>
+    <Card v-else :header="props.title">
       <div
         class="home-section__section-item"
         v-for="item in sectionItems"

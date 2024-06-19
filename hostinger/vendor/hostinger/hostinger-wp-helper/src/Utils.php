@@ -3,7 +3,7 @@
 namespace Hostinger\WpHelper;
 
 class Utils {
-  
+
 	private static string $apiTokenFile;
 
 	private const HPANEL_DOMAIN_URL = 'https://hpanel.hostinger.com/websites/';
@@ -17,37 +17,65 @@ class Utils {
 		}
 	}
 
+    /**
+     * @param string $pluginSlug
+     *
+     * @return bool
+     */
 	// Check if a specific plugin is active by its slug
-	public static function isPluginActive( $pluginSlug ): bool {
-		if ( is_multisite() ) {
-			// Check network-wide active plugins
-			$activePlugins = get_site_option( 'active_sitewide_plugins', [] );
-			if ( isset( $activePlugins[ $pluginSlug . '.php' ] ) ) {
-				return true;
-			}
+    public static function isPluginActive( string $pluginSlug ): bool {
+        $plugin_relative_path = $pluginSlug . '/' . $pluginSlug . '.php';
 
-			// Check each site in the network
-			$sites = get_sites();
-			foreach ( $sites as $site ) {
-				switch_to_blog( $site->blog_id );
-				$activePlugins = get_option( 'active_plugins', [] );
-				if ( in_array( $pluginSlug . '.php', $activePlugins ) ) {
-					restore_current_blog();
+        if ( is_multisite() ) {
+            return self::checkIsPluginActiveMultiSite( $plugin_relative_path );
+        }
 
-					return true;
-				}
-				restore_current_blog();
-			}
-		} else {
-			// Check active plugins in a single site
-			$activePlugins = get_option( 'active_plugins', [] );
-			if ( in_array( $pluginSlug . '.php', $activePlugins ) ) {
-				return true;
-			}
-		}
+        return self::checkIsPluginActive( $plugin_relative_path );
+    }
 
-		return false;
-	}
+    /**
+     * @param string $plugin_relative_path
+     *
+     * @return bool
+     */
+    public static function checkIsPluginActiveMultiSite( string $plugin_relative_path ): bool {
+        // Check network-wide active plugins
+        $activePlugins = get_site_option( 'active_sitewide_plugins', [] );
+        if ( in_array( $plugin_relative_path, $activePlugins ) ) {
+            return true;
+        }
+
+        // Check each site in the network
+        $sites = get_sites();
+        foreach ( $sites as $site ) {
+            switch_to_blog( $site->blog_id );
+            $activePlugins = get_option( 'active_plugins', [] );
+            if ( in_array( $plugin_relative_path, $activePlugins ) ) {
+                restore_current_blog();
+
+                return true;
+            }
+            restore_current_blog();
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $plugin_relative_path
+     *
+     * @return bool
+     */
+    public static function checkIsPluginActive( string $plugin_relative_path ): bool {
+        // Check active plugins in a single site
+        $activePlugins = get_option( 'active_plugins', [] );
+
+        if ( in_array( $plugin_relative_path, $activePlugins ) ) {
+            return true;
+        }
+
+        return false;
+    }
 
 	// Get the content of the API token file
 	public static function getApiToken(): string {
