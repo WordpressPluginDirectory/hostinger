@@ -59,16 +59,21 @@ class Menus
                 'title'  => $hostinger_icon . esc_html__('Hostinger', 'hostinger-wp-menu-package'),
             ]);
 
-            foreach ($menu_items as $menu_item) {
-                $bar->add_menu([
-                    'id'     => $menu_item['id'],
-                    'parent' => 'hostinger_admin_bar',
-                    'group'  => null,
-                    'title'  => $menu_item['title'],
-                    'href'   => $menu_item['href'],
-                    'meta'   => $menu_item['meta'],
-                ]);
-            }
+	        foreach ($menu_items as $menu_item) {
+		        $menu_item_data = [
+			        'id'     => $menu_item['id'],
+			        'parent' => 'hostinger_admin_bar',
+			        'group'  => null,
+			        'title'  => $menu_item['title'],
+			        'href'   => $menu_item['href'],
+		        ];
+
+		        if( isset( $menu_item['meta'] ) ){
+			        $menu_item_data['meta'] = $menu_item['meta'];
+		        }
+
+		        $bar->add_menu($menu_item_data);
+	        }
         }
     }
 

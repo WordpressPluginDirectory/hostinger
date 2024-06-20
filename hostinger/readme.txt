@@ -1,10 +1,10 @@
 === Hostinger Tools ===
 Tags: hostinger, tools, maintenance, security, redirects, https, xml-rpc
 Requires at least: 5.5
-Version: 3.0.1
+Version: 3.0.2
 Tested up to: 6.5
 Requires PHP: 8.0
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -355,3 +355,6 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 3.0.1 (2024-06-06)
 - Added skeleton loader for UI
 - Removed hPanel links from admin bar menu
+
+3.0.2 (2024-06-19)
+- Updated menu package
