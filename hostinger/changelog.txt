@@ -220,3 +220,6 @@ Fixed
 
 3.0.2 (2024-06-19)
 - Updated menu package
+
+3.0.3 (2024-07-02)
+- Added tests

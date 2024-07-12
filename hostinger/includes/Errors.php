@@ -5,9 +5,9 @@ namespace Hostinger;
 defined( 'ABSPATH' ) || exit;
 
 class Errors {
-    /**
-     * @var array[]
-     */
+	/**
+	 * @var array[]
+	 */
 	private array $error_messages = array();
 
 	public function __construct() {
@@ -24,11 +24,11 @@ class Errors {
 		);
 	}
 
-    /**
-     * @param string $error_code
-     *
-     * @return mixed
-     */
+	/**
+	 * @param string $error_code
+	 *
+	 * @return mixed
+	 */
 	public function get_error_message( string $error_code ) {
 		if ( array_key_exists( $error_code, $this->error_messages ) ) {
 			$message_data = $this->error_messages[ $error_code ];

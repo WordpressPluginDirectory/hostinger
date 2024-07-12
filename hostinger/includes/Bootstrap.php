@@ -11,6 +11,7 @@ use Hostinger\Admin\Hooks as AdminHooks;
 use Hostinger\Admin\Menu as AdminMenu;
 use Hostinger\Admin\Redirects as AdminRedirects;
 use Hostinger\Preview\Assets as PreviewAssets;
+use Hostinger\WpHelper\Utils;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,8 +39,8 @@ class Bootstrap {
 			new Cli();
 		}
 
-        $plugin_settings = new PluginSettings();
-        $plugin_options = $plugin_settings->get_plugin_settings();
+		$plugin_settings = new PluginSettings();
+		$plugin_options  = $plugin_settings->get_plugin_settings();
 
 		if ( $plugin_options->get_maintenance_mode() ) {
 			require_once HOSTINGER_ABSPATH . 'includes/ComingSoon.php';
@@ -52,8 +53,9 @@ class Bootstrap {
 	}
 
 	private function load_admin_dependencies(): void {
+		$utils = new Utils();
 		new AdminAssets();
-		new AdminHooks();
+		new AdminHooks( $utils );
 		new AdminMenu();
 		new AdminRedirects();
 		new AdminRedirects();
@@ -64,10 +66,10 @@ class Bootstrap {
 		new PreviewAssets();
 		new Hooks();
 
-        $plugin_settings = new PluginSettings();
+		$plugin_settings = new PluginSettings();
 
-        $settings_routes = new SettingsRoutes( $plugin_settings );
-        $routes = new Routes( $settings_routes );
-        $routes->init();
+		$settings_routes = new SettingsRoutes( $plugin_settings );
+		$routes          = new Routes( $settings_routes );
+		$routes->init();
 	}
 }

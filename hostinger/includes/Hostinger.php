@@ -10,22 +10,22 @@ class Hostinger {
 	protected string $plugin_name = 'Hostinger';
 	protected string $version;
 
-    /**
-     * @return void
-     */
+	/**
+	 * @return void
+	 */
 	public function bootstrap(): void {
 		$this->version = $this->get_plugin_version();
 		$bootstrap     = new Bootstrap();
 		$bootstrap->run();
 	}
 
-    /**
-     * @return void
-     */
+	/**
+	 * @return void
+	 */
 	public function run(): void {
 		$this->bootstrap();
 	}
-
+	/** PHPCS:disable WordPress.NamingConventions.PrefixAllGlobals.VariableConstantNameFound */
 	/**
 	 * Define constant
 	 *
@@ -37,10 +37,10 @@ class Hostinger {
 			define( $name, $value );
 		}
 	}
-
-    /**
-     * @return string
-     */
+	/** PHPCS:enable */
+	/**
+	 * @return string
+	 */
 	private function get_plugin_version(): string {
 		if ( defined( 'HOSTINGER_VERSION' ) ) {
 			return HOSTINGER_VERSION;
