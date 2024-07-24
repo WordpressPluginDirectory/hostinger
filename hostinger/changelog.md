@@ -217,3 +217,10 @@ Fixed
 
 3.0.3 (2024-07-02)
 - Added tests
+
+3.0.4 (2024-07-09)
+- Vendor autoload fix
+
+3.0.5 (2024-07-24)
+- PHP version card change
+- Translations

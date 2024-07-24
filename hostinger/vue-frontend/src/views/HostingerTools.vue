@@ -118,6 +118,18 @@ const isPhpUpdateDisplayed = computed(() => {
   });
 });
 
+const isHostingerPlatform = computed(() => {
+    return parseInt(hostinger_tools_data.hplatform) > 0;
+});
+
+const phpVersionCardText = computed(() => {
+    if( !isHostingerPlatform.value ) {
+        return `${translate("hostinger_tools_update_to")} 8.1 ${translate("hostinger_tools_update_to_recommended")}`;
+    }
+
+    return `${translate("hostinger_tools_update_to")} 8.1`;
+});
+
 const phpVersionCard = computed(() => ({
   title: translate("hostinger_tools_php_version"),
   description: isPhpUpdateDisplayed.value
@@ -125,9 +137,10 @@ const phpVersionCard = computed(() => ({
     : translate("hostinger_tools_running_latest_version"),
   toolImageSrc: getAssetSource("images/icons/icon-php.svg"),
   version: settingsData.value?.phpVersion,
+  buttonShown: isHostingerPlatform.value,
   actionButton: isPhpUpdateDisplayed.value
     ? {
-        text: `${translate("hostinger_tools_update_to")} 8.1`,
+        text: phpVersionCardText.value,
         onClick: () => {
           window.open(
             `https://auth.hostinger.com/login?r=/section/php-configuration/domain/${location.host}`,
@@ -145,6 +158,7 @@ const wordPressVersionCard = computed(() => ({
     : translate("hostinger_tools_running_latest_version"),
   toolImageSrc: getAssetSource("images/icons/icon-wordpress-light.svg"),
   version: settingsData.value?.currentWpVersion,
+  buttonShown: true,
   actionButton: isWordPressUpdateDisplayed.value
     ? {
         text: `${translate("hostinger_tools_update_to")} ${settingsData.value?.newestWpVersion}`,
@@ -212,7 +226,10 @@ const goToPreviewWebsite = () => {
         v-bind="wordPressVersionCard"
         class="h-mr-16"
       />
-      <ToolVersionCard :is-loading="isPageLoading" v-bind="phpVersionCard" />
+      <ToolVersionCard
+          :is-loading="isPageLoading"
+          v-bind="phpVersionCard"
+      />
     </div>
     <div>
       <SectionCard

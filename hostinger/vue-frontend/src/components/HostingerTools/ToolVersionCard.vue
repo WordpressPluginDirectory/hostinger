@@ -9,6 +9,7 @@ type Props = {
   description?: string;
   toolImageSrc: string;
   version?: string;
+  buttonShown?: boolean;
   actionButton?: {
     text: string;
     onClick?: () => void;
@@ -50,8 +51,13 @@ defineProps<Props>();
       class="h-mt-20"
       iconAppend="icon-launch-light"
       @click="actionButton?.onClick"
-      v-if="actionButton?.text"
+      v-if="buttonShown"
       >{{ actionButton.text }}</Button
     >
+    <p v-else
+       class="h-mt-20 text-bold-1"
+    >
+        {{ actionButton?.text }}
+    </p>
   </Card>
 </template>
