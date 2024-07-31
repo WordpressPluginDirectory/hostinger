@@ -5,7 +5,7 @@ namespace Hostinger;
 defined( 'ABSPATH' ) || exit;
 
 class Activator {
-    public const INSTALLATION_OPTION_NAME = 'hts_new_installation';
+	public const INSTALLATION_OPTION_NAME = 'hts_new_installation';
 	/**
 	 * @return void
 	 */

@@ -106,7 +106,7 @@ class Assets {
 				'home_url'      => home_url(),
 				'site_url'      => get_site_url(),
 				'plugin_url'    => HOSTINGER_PLUGIN_URL,
-                'hplatform'      => !empty( $_SERVER['H_PLATFORM'] ) ? 1 : 0,
+				'hplatform'     => ! empty( $_SERVER['H_PLATFORM'] ) ? 1 : 0,
 				'translations'  => array(
 					'routes_hostinger_tools'              => __( 'Hostinger Tools', 'hostinger' ),
 					'hostinger_tools_disable_public_access' => __( 'Disable public access to the site (WordPress admins will still be able to access)', 'hostinger' ),

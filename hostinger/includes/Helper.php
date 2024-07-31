@@ -43,7 +43,7 @@ class Helper {
 
 	public function is_preview_domain( $headers = null ): bool {
 		// @codeCoverageIgnoreStart
-		if ($headers === null && function_exists('getallheaders')) {
+		if ( $headers === null && function_exists( 'getallheaders' ) ) {
 			$headers = getallheaders();
 		}
 		// @codeCoverageIgnoreEnd

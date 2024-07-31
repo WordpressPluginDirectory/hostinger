@@ -5,13 +5,13 @@ namespace Hostinger\Admin;
 defined( 'ABSPATH' ) || exit;
 
 class Ajax {
-	private const TWO_DAYS                 = 86400 * 2;
-    public const AJAX_METHOD_PREFIX = 'wp_ajax_hostinger_';
+	private const TWO_DAYS                = 86400 * 2;
+	public const AJAX_METHOD_PREFIX       = 'wp_ajax_hostinger_';
 	public const HIDE_PLUGIN_SPLIT_NOTICE = 'hts_plugin_split_notice_hidden';
 
-    public const AJAX_EVENTS = array(
-        'dismiss_plugin_split_notice',
-    );
+	public const AJAX_EVENTS = array(
+		'dismiss_plugin_split_notice',
+	);
 
 	public function __construct() {
 		add_action( 'admin_init', array( $this, 'define_ajax_events' ), 0 );

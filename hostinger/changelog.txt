@@ -230,3 +230,6 @@ Fixed
 3.0.5 (2024-07-24)
 - PHP version card change
 - Translations
+
+3.0.6 (2024-07-30)
+- Added cli commands descriptions

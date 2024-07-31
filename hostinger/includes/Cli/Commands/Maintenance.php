@@ -12,7 +12,49 @@ class Maintenance {
 
 	public static function define_command(): void {
 		if ( class_exists( '\WP_CLI' ) ) {
-			WP_CLI::add_command( 'hostinger maintenance', self::class );
+			WP_CLI::add_command(
+				'hostinger',
+				self::class,
+				array(
+					'shortdesc' => 'List of Hostinger commands.',
+					'longdesc'  => 'Available Hostinger commands:' . "\n\n" .
+								'  wp hostinger maintenance mode <0|1>' . "\n" .
+								'  Manage the maintenance mode of the site. Use 1 to enable and 0 to disable maintenance mode.' . "\n\n" .
+								'  wp hostinger maintenance status' . "\n" .
+								'  Display the current maintenance mode status.' . "\n\n" .
+								'## SUBCOMMANDS' . "\n\n" .
+								'* mode <0|1>' . "\n" .
+								': Enable (1) or disable (0) maintenance mode.' . "\n\n" .
+								'* status' . "\n" .
+								': Display the current maintenance mode status.' . "\n\n" .
+								'## EXAMPLES' . "\n\n" .
+								'  wp hostinger maintenance mode 1' . "\n" .
+								'  Enables the maintenance mode.' . "\n\n" .
+								'  wp hostinger maintenance mode 0' . "\n" .
+								'  Disables the maintenance mode.' . "\n\n" .
+								'  wp hostinger maintenance status' . "\n" .
+								'  Returns whether maintenance mode is enabled or disabled.' . "\n",
+				)
+			);
+
+			WP_CLI::add_command(
+				'hostinger maintenance',
+				self::class,
+				array(
+					'shortdesc' => 'Manage the maintenance mode of the site.',
+					'longdesc'  => 'This command allows you to enable or disable maintenance mode for the site.' . "\n\n" .
+								'## OPTIONS' . "\n\n" .
+								'mode <0|1>' . "\n" .
+								': Enable (1) or disable (0) maintenance mode.' . "\n\n" .
+								'## EXAMPLES' . "\n\n" .
+								'  wp hostinger maintenance mode 1' . "\n" .
+								'  Enables the maintenance mode.' . "\n\n" .
+								'  wp hostinger maintenance mode 0' . "\n" .
+								'  Disables the maintenance mode.' . "\n\n" .
+								'  wp hostinger maintenance status' . "\n" .
+								'  Returns whether maintenance mode is enabled or disabled.' . "\n",
+				)
+			);
 		}
 	}
 
