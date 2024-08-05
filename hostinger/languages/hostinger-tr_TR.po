@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Hostinger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 08:27+0000\n"
-"PO-Revision-Date: 2024-07-24 06:48+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-07-31 07:22+0000\n"
+"Last-Translator: Merve Özcan - mrvzcn(@)outlook.com\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -12,10 +12,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.7; wp-6.4.4\n"
+"X-Loco-Version: 2.6.10; wp-6.4.5\n"
 "X-Domain: hostinger"
 
-#: includes/Admin/Assets.php:137
+#: includes/Admin/Assets.php:140
 msgid ""
 " Turning on XML-RPC might make your site less secure. Do you want to proceed?"
 msgstr ""
@@ -36,7 +36,6 @@ msgstr ""
 
 #. translators: %s: PHP version
 #: hostinger.php:84
-#, fuzzy
 msgid "Attention:"
 msgstr "Dikkat:"
 
@@ -44,11 +43,11 @@ msgstr "Dikkat:"
 msgid "Bypass link"
 msgstr "Atlama bağlantısı"
 
-#: includes/Admin/Assets.php:141
+#: includes/Admin/Assets.php:144
 msgid "Bypass link reset"
 msgstr "Atlama bağlantısı sıfırlama"
 
-#: includes/Admin/Assets.php:139 includes/Admin/Assets.php:143
+#: includes/Admin/Assets.php:142 includes/Admin/Assets.php:146
 msgid "Cancel"
 msgstr "İptal "
 
@@ -68,7 +67,7 @@ msgstr ""
 msgid "Disable XML-RPC"
 msgstr "XML-RPC'yi devre dışı bırak "
 
-#: includes/Admin/Assets.php:138
+#: includes/Admin/Assets.php:141
 msgid "Disclaimer"
 msgstr "Sorumluluk Reddi "
 
@@ -79,17 +78,15 @@ msgstr ""
 "olun "
 
 #: includes/Admin/Assets.php:119
-#, fuzzy
 #| msgid "Force HTTPs"
 msgid "Force HTTPS"
-msgstr "HTTPS'yi Zorla "
+msgstr "HTTPS'yi Zorla"
 
 #: includes/Admin/Assets.php:121
 msgid "Force WWW"
 msgstr "WWW'yi zorla "
 
-#: includes/Admin/Hooks.php:57
-#, fuzzy
+#: includes/Admin/Assets.php:139 includes/Admin/Hooks.php:54
 msgid "Got it"
 msgstr "Anladım"
 
@@ -97,20 +94,29 @@ msgstr "Anladım"
 msgid "Hostinger"
 msgstr "Hostinger"
 
-#: includes/Admin/Hooks.php:55
-#, fuzzy
+#: includes/Admin/Hooks.php:52
 msgid "Hostinger Easy Onboarding"
-msgstr "Hostinger Easy Onboarding"
+msgstr "Hostinger Kolay Başlangıç"
 
-#: includes/Admin/Hooks.php:51
-#, fuzzy
+#: includes/Admin/Hooks.php:48
 msgid "Hostinger plugin updates"
 msgstr "Hostinger eklenti güncellemeleri"
 
 #. Plugin Name of the plugin
-#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:54
+#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:51
 msgid "Hostinger Tools"
 msgstr "Hostinger Araçları "
+
+#: includes/Admin/Assets.php:138
+#, fuzzy
+msgid ""
+"Hostinger Tools will offer new tools to simplify your site management. And "
+"Hostinger Easy Onboarding will guide you through the steps of building a "
+"website."
+msgstr ""
+"Hostinger Tools, site yönetiminizi basitleştirmek için yeni araçlar sunacak. "
+"Ve Hostinger Easy Onboarding, bir web sitesi oluşturma adımlarında size "
+"rehberlik edecek."
 
 #. Description of the plugin
 msgid "Hostinger WordPress plugin."
@@ -126,11 +132,10 @@ msgid "https://www.hostinger.com"
 msgstr "https://www.hostinger.com.tr"
 
 #: includes/Admin/Assets.php:129
-#, fuzzy
 msgid "is recommended"
-msgstr "tavsiye edilir"
+msgstr "önerilir"
 
-#: includes/Admin/Assets.php:145
+#: includes/Admin/Assets.php:148
 msgid "Link has been reset"
 msgstr "Bağlantı sıfırlandı"
 
@@ -146,8 +151,7 @@ msgstr "Bakım modu"
 msgid "New WordPress website is being built and will be published soon"
 msgstr "Yeni WordPress web sitesi oluşturuluyor ve yakında yayınlanacak"
 
-#: includes/Admin/Hooks.php:54
-#, fuzzy
+#: includes/Admin/Hooks.php:51
 msgid "offers a toolkit for easier site maintenance."
 msgstr "daha kolay site bakımı için bir araç seti sunar."
 
@@ -173,12 +177,11 @@ msgstr "PHP sürümü"
 msgid "Preview my website"
 msgstr "Web sitemin önizlemesi"
 
-#: includes/Admin/Assets.php:140
+#: includes/Admin/Assets.php:143
 msgid "Proceed anyway"
 msgstr "Yine de devam et "
 
-#: includes/Admin/Hooks.php:55
-#, fuzzy
+#: includes/Admin/Hooks.php:52
 msgid ""
 "provides guidance and learning resources for beginners to get started with "
 "building a site using WordPress."
@@ -202,7 +205,7 @@ msgstr "Tüm HTTP URL'lerini HTTPS sitelerine yönlendirir "
 msgid "Redirects all WWW URLs to non-WWW ones"
 msgstr "Tüm WWW URL'lerini WWW olmayanlara yönlendirir"
 
-#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:144
+#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:147
 msgid "Reset link"
 msgstr "Bağlantıyı sıfırla "
 
@@ -218,19 +221,17 @@ msgstr "Güvenlik "
 msgid "Skip-link that bypasses the maintenance mode"
 msgstr "Bakım modunu atlayan bağlantıyı geç"
 
-#: includes/Admin/Hooks.php:52
-#, fuzzy
+#: includes/Admin/Hooks.php:49
 msgid "The Hostinger plugin has been split into two different plugins:"
 msgstr "Hostinger eklentisi iki farklı eklentiye bölündü:"
 
 #. translators: %s: PHP version
 #: hostinger.php:84
-#, fuzzy
 #| msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>. "
 msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>."
 msgstr "Hostinger eklentisi minimum <b>%s</b> PHP sürümü gerektirir."
 
-#: includes/Admin/Assets.php:142
+#: includes/Admin/Assets.php:145
 msgid ""
 "This will invalidate the currently generated link in use. This action cannot "
 "be undone, are you sure you want to proceed?"
@@ -240,7 +241,6 @@ msgstr ""
 
 #: includes/Admin/Menu.php:22 includes/Admin/Menu.php:31
 #: includes/Admin/Menu.php:32
-#, fuzzy
 msgid "Tools"
 msgstr "Araçlar"
 
@@ -266,6 +266,15 @@ msgstr ""
 "sunucu hatasıyla karşılaştı. Lütfen daha sonra tekrar deneyin ve sorun devam "
 "ederse yardım için lütfen destek ekibimizle iletişime geçin."
 
+#: includes/Admin/Assets.php:137
+#, fuzzy
+msgid ""
+"We’re splitting Hostinger plugin into two: Hostinger Tools and Hostinger "
+"Easy Onboarding"
+msgstr ""
+"Hostinger eklentisini ikiye ayırıyoruz: Hostinger Tools ve Hostinger Easy "
+"Onboarding"
+
 #: includes/Admin/Assets.php:125
 msgid "WordPress version"
 msgstr "WordPress sürümü "
@@ -289,6 +298,5 @@ msgstr ""
 
 #. translators: %s: PHP version
 #: hostinger.php:88
-#, fuzzy
 msgid "You are running <b>%s</b> PHP version."
 msgstr "<b>%s</b> PHP sürümünü çalıştırıyorsunuz."

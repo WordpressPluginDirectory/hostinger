@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Hostinger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 08:27+0000\n"
-"PO-Revision-Date: 2024-07-24 06:48+0000\n"
+"PO-Revision-Date: 2024-07-31 07:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Loco-Version: 2.6.7; wp-6.4.4\n"
 "X-Domain: hostinger"
 
-#: includes/Admin/Assets.php:137
+#: includes/Admin/Assets.php:140
 msgid ""
 " Turning on XML-RPC might make your site less secure. Do you want to proceed?"
 msgstr ""
@@ -42,11 +42,11 @@ msgstr ""
 "\n"
 "\n"
 
-#: includes/Admin/Assets.php:141
+#: includes/Admin/Assets.php:144
 msgid "Bypass link reset"
 msgstr "重置旁路链路"
 
-#: includes/Admin/Assets.php:139 includes/Admin/Assets.php:143
+#: includes/Admin/Assets.php:142 includes/Admin/Assets.php:146
 msgid "Cancel"
 msgstr "取消"
 
@@ -64,7 +64,7 @@ msgstr "禁止公众访问网站（WordPress 管理员仍可访问）"
 msgid "Disable XML-RPC"
 msgstr "禁用 XML-RPC"
 
-#: includes/Admin/Assets.php:138
+#: includes/Admin/Assets.php:141
 msgid "Disclaimer"
 msgstr "免责声明"
 
@@ -82,7 +82,7 @@ msgstr "强制 HTTP"
 msgid "Force WWW"
 msgstr "强制 WWW"
 
-#: includes/Admin/Hooks.php:57
+#: includes/Admin/Assets.php:139 includes/Admin/Hooks.php:54
 #, fuzzy
 msgid "Got it"
 msgstr "明白"
@@ -91,20 +91,28 @@ msgstr "明白"
 msgid "Hostinger"
 msgstr "Hostinger"
 
-#: includes/Admin/Hooks.php:55
+#: includes/Admin/Hooks.php:52
 #, fuzzy
 msgid "Hostinger Easy Onboarding"
 msgstr "Hostinger轻松入职"
 
-#: includes/Admin/Hooks.php:51
+#: includes/Admin/Hooks.php:48
 #, fuzzy
 msgid "Hostinger plugin updates"
 msgstr "Hostinger 插件更新"
 
 #. Plugin Name of the plugin
-#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:54
+#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:51
 msgid "Hostinger Tools"
 msgstr "Hostinger 工具 "
+
+#: includes/Admin/Assets.php:138
+#, fuzzy
+msgid ""
+"Hostinger Tools will offer new tools to simplify your site management. And "
+"Hostinger Easy Onboarding will guide you through the steps of building a "
+"website."
+msgstr "Hostinger工具将提供简化网站管理的新工具。而Hostinger Easy Onboarding将指导您完成网站建设步骤。"
 
 #. Description of the plugin
 msgid "Hostinger WordPress plugin."
@@ -123,7 +131,7 @@ msgstr "https://www.hostinger.com"
 msgid "is recommended"
 msgstr "建议"
 
-#: includes/Admin/Assets.php:145
+#: includes/Admin/Assets.php:148
 msgid "Link has been reset"
 msgstr "已重置链接"
 
@@ -139,7 +147,7 @@ msgstr "维护模式 "
 msgid "New WordPress website is being built and will be published soon"
 msgstr "新的WordPress网站正在建设中，将很快发布"
 
-#: includes/Admin/Hooks.php:54
+#: includes/Admin/Hooks.php:51
 #, fuzzy
 msgid "offers a toolkit for easier site maintenance."
 msgstr "提供了一个工具包，使网站维护更加轻松。"
@@ -160,11 +168,11 @@ msgstr "PHP 版本 "
 msgid "Preview my website"
 msgstr "预览我的网站"
 
-#: includes/Admin/Assets.php:140
+#: includes/Admin/Assets.php:143
 msgid "Proceed anyway"
 msgstr "无论如何都要继续 "
 
-#: includes/Admin/Hooks.php:55
+#: includes/Admin/Hooks.php:52
 #, fuzzy
 msgid ""
 "provides guidance and learning resources for beginners to get started with "
@@ -187,7 +195,7 @@ msgstr "将所有 HTTP URL 重定向到 HTTPS 网站 "
 msgid "Redirects all WWW URLs to non-WWW ones"
 msgstr "将所有 WWW URL 重定向到非 WWW URL "
 
-#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:144
+#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:147
 msgid "Reset link"
 msgstr "重置链接 "
 
@@ -203,7 +211,7 @@ msgstr "安全 "
 msgid "Skip-link that bypasses the maintenance mode"
 msgstr "跳过维护模式的Skip-link"
 
-#: includes/Admin/Hooks.php:52
+#: includes/Admin/Hooks.php:49
 #, fuzzy
 msgid "The Hostinger plugin has been split into two different plugins:"
 msgstr "Hostinger 插件已被拆分为两个不同的插件："
@@ -215,7 +223,7 @@ msgstr "Hostinger 插件已被拆分为两个不同的插件："
 msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>."
 msgstr "Hostinger插件要求的最低PHP版本为<b>%s</b>。"
 
-#: includes/Admin/Assets.php:142
+#: includes/Admin/Assets.php:145
 msgid ""
 "This will invalidate the currently generated link in use. This action cannot "
 "be undone, are you sure you want to proceed?"
@@ -245,6 +253,13 @@ msgid ""
 "encountered a server error. Please try again later, and if the issue "
 "persists, kindly contact our support team for assistance."
 msgstr "给您带来不便，我们深表歉意。人工智能内容生成过程遇到服务器错误。请稍后重试，如果问题仍然存在，请联系我们的客户支持团队寻求帮助。"
+
+#: includes/Admin/Assets.php:137
+#, fuzzy
+msgid ""
+"We’re splitting Hostinger plugin into two: Hostinger Tools and Hostinger "
+"Easy Onboarding"
+msgstr "我们将Hostinger插件一分为二：Hostinger Tools和Hostinger Easy Onboarding。"
 
 #: includes/Admin/Assets.php:125
 msgid "WordPress version"

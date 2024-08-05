@@ -37,11 +37,8 @@ class Hooks {
 	}
 
 	public function message_about_plugin_split(): void {
-		$plugin_split_notice_hidden = get_transient( 'hts_plugin_split_notice_hidden' );
-		if ( $plugin_split_notice_hidden === false & version_compare( HOSTINGER_VERSION, '3.0.0', '>=' ) ) {
-			if ( ! $this->utils->isPluginActive( 'hostinger-easy-onboarding' ) ) {
-				add_action( 'admin_notices', array( $this, 'custom_admin_notice' ) );
-			}
+		if ( $this->helper->should_plugin_split_notice_shown() ) {
+            add_action( 'admin_notices', array( $this, 'custom_admin_notice' ) );
 		}
 	}
 

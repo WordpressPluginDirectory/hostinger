@@ -11,14 +11,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-03-20T07:03:00+00:00\n"
-"PO-Revision-Date: 2024-07-24 06:46+0000\n"
+"PO-Revision-Date: 2024-07-31 09:03+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: hostinger\n"
 "Language: hi_IN\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Loco-Version: 2.6.10; wp-6.4.4"
+"X-Loco-Version: 2.6.10; wp-6.4.5"
 
-#: includes/Admin/Assets.php:137
+#: includes/Admin/Assets.php:140
 msgid ""
 " Turning on XML-RPC might make your site less secure. Do you want to proceed?"
 msgstr ""
@@ -46,11 +46,11 @@ msgstr "कृपया ध्यान दें:"
 msgid "Bypass link"
 msgstr "बायपास लिंक"
 
-#: includes/Admin/Assets.php:141
+#: includes/Admin/Assets.php:144
 msgid "Bypass link reset"
 msgstr "बायपास लिंक रीसेट"
 
-#: includes/Admin/Assets.php:139 includes/Admin/Assets.php:143
+#: includes/Admin/Assets.php:142 includes/Admin/Assets.php:146
 msgid "Cancel"
 msgstr "रद्द करें"
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Disable XML-RPC"
 msgstr "XML-RPC अक्षम करें"
 
-#: includes/Admin/Assets.php:138
+#: includes/Admin/Assets.php:141
 msgid "Disclaimer"
 msgstr "डिस्क्लेमर"
 
@@ -78,7 +78,6 @@ msgid "For improved security, ensure you use the latest version of WordPress"
 msgstr "बेहतर सुरक्षा के लिए WordPress के नवीनतम संस्करण का उपयोग करें"
 
 #: includes/Admin/Assets.php:119
-#, fuzzy
 #| msgid "Force HTTPs"
 msgid "Force HTTPS"
 msgstr "HTTPs को बाध्य करें"
@@ -87,7 +86,7 @@ msgstr "HTTPs को बाध्य करें"
 msgid "Force WWW"
 msgstr "WWW को बाध्य करें"
 
-#: includes/Admin/Hooks.php:57
+#: includes/Admin/Assets.php:139 includes/Admin/Hooks.php:54
 msgid "Got it"
 msgstr "समझ गए"
 
@@ -95,18 +94,28 @@ msgstr "समझ गए"
 msgid "Hostinger"
 msgstr "Hostinger"
 
-#: includes/Admin/Hooks.php:55
+#: includes/Admin/Hooks.php:52
 msgid "Hostinger Easy Onboarding"
-msgstr ""
+msgstr "Hostinger Easy Onboarding"
 
-#: includes/Admin/Hooks.php:51
+#: includes/Admin/Hooks.php:48
 msgid "Hostinger plugin updates"
 msgstr "Hostinger प्लगइन अपडेट्स"
 
 #. Plugin Name of the plugin
-#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:54
+#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:51
 msgid "Hostinger Tools"
 msgstr "Hostinger टूल्स"
+
+#: includes/Admin/Assets.php:138
+msgid ""
+"Hostinger Tools will offer new tools to simplify your site management. And "
+"Hostinger Easy Onboarding will guide you through the steps of building a "
+"website."
+msgstr ""
+"Hostinger Tools में ऐसे नए टूल्स का समावेश है जो साइट प्रबंधन को सरल बनाते "
+"हैं। और Hostinger Easy Onboarding वेबसाइट बनाने के स्टेप्स को लेकर आपका "
+"मार्गदर्शन करेगा।"
 
 #. Description of the plugin
 msgid "Hostinger WordPress plugin."
@@ -122,9 +131,9 @@ msgstr "https://www.hostinger.in"
 
 #: includes/Admin/Assets.php:129
 msgid "is recommended"
-msgstr ""
+msgstr "सुझाया गया है"
 
-#: includes/Admin/Assets.php:145
+#: includes/Admin/Assets.php:148
 msgid "Link has been reset"
 msgstr "लिंक रीसेट की जा चुकी है"
 
@@ -140,9 +149,9 @@ msgstr "रखरखाव मोड"
 msgid "New WordPress website is being built and will be published soon"
 msgstr "नई WordPress वेबसाइट बनाई जा रही है और जल्द ही पब्लिश की जाएगी"
 
-#: includes/Admin/Hooks.php:54
+#: includes/Admin/Hooks.php:51
 msgid "offers a toolkit for easier site maintenance."
-msgstr ""
+msgstr "साइट का रखरखाव आसान बनाने वाला टूलकिट प्रदान करता है।"
 
 #: includes/Admin/Views/Partials/RateUs.php:38
 msgid ""
@@ -160,15 +169,17 @@ msgstr "PHP संस्करण"
 msgid "Preview my website"
 msgstr "मेरी वेबसाइट का प्रीव्यू दिखाएं"
 
-#: includes/Admin/Assets.php:140
+#: includes/Admin/Assets.php:143
 msgid "Proceed anyway"
 msgstr "आगे बढ़ें"
 
-#: includes/Admin/Hooks.php:55
+#: includes/Admin/Hooks.php:52
 msgid ""
 "provides guidance and learning resources for beginners to get started with "
 "building a site using WordPress."
 msgstr ""
+"WordPress का उपयोग कर वेबसाइट बनाने के लिए नौसिखिए लोगों का मार्गदर्शन और "
+"सीखने के संसाधन प्रदान करता है।"
 
 #: includes/Admin/Views/Partials/RateUs.php:2
 msgid "Rate this plugin"
@@ -186,7 +197,7 @@ msgstr "सभी HTTP URLs को HTTPS साइट्स पर रीडा�
 msgid "Redirects all WWW URLs to non-WWW ones"
 msgstr "सभी WWW URLs को गैर-WWW URLs पर रीडायरेक्ट करता है"
 
-#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:144
+#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:147
 msgid "Reset link"
 msgstr "लिंक रीसेट करें"
 
@@ -202,18 +213,17 @@ msgstr "सुरक्षा"
 msgid "Skip-link that bypasses the maintenance mode"
 msgstr "स्किप-लिंक जो रखरखाव मोड को बायपास करती है"
 
-#: includes/Admin/Hooks.php:52
+#: includes/Admin/Hooks.php:49
 msgid "The Hostinger plugin has been split into two different plugins:"
-msgstr ""
+msgstr "Hostinger प्लगइन को दो अलग-अलग प्लगइन्स में बांटा गया है:"
 
 #. translators: %s: PHP version
 #: hostinger.php:84
-#, fuzzy
 #| msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>. "
 msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>."
 msgstr "इस Hostinger प्लगइन को न्यूनतम <b>%s</b> PHP संस्करण की ज़रूरत होती है।"
 
-#: includes/Admin/Assets.php:142
+#: includes/Admin/Assets.php:145
 msgid ""
 "This will invalidate the currently generated link in use. This action cannot "
 "be undone, are you sure you want to proceed?"
@@ -247,6 +257,14 @@ msgstr ""
 "असुविधा के लिए खेद है। AI कॉन्टेंट जनरेशन प्रक्रिया में सर्वर त्रुटि पेश आई "
 "है। कृपया थोड़ी देर बाद दोबारा प्रयास करें। और यदि समस्या बनी रहती है, तो "
 "हमारी सहायता टीम से संपर्क करें।"
+
+#: includes/Admin/Assets.php:137
+msgid ""
+"We’re splitting Hostinger plugin into two: Hostinger Tools and Hostinger "
+"Easy Onboarding"
+msgstr ""
+"हम Hostinger प्लगइन को दो भागों में बांट रहे हैं: Hostinger Tools और "
+"Hostinger Easy Onboarding"
 
 #: includes/Admin/Assets.php:125
 msgid "WordPress version"

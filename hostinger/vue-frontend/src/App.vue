@@ -29,6 +29,7 @@ const route = useRoute();
   position: absolute;
   right: 0;
   padding: 40px;
+  z-index: 2;
 
   @media (max-width: 576px) {
     padding: 16px;

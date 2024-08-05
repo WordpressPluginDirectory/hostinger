@@ -227,3 +227,6 @@ Fixed
 
 3.0.6 (2024-07-30)
 - Added cli commands descriptions
+
+3.0.7 (2024-07-31)
+- Added plugin split notice to plugin UI

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import PluginSplitNotice from "@/components/PluginSplitNotice.vue";
+
 type Props = {
   title: any;
 };
@@ -9,6 +11,7 @@ const props = defineProps<Props>();
 <template>
   <div class="wrapper">
     <div class="wrapper__content">
+      <PluginSplitNotice></PluginSplitNotice>
       <h1 class="text-title-3">{{ props.title }}</h1>
 
       <slot />

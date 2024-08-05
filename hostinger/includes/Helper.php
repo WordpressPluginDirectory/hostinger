@@ -70,6 +70,24 @@ class Helper {
 
 		return $code;
 	}
+
+    public function should_plugin_split_notice_shown() {
+        $plugin_split_notice_hidden = get_transient( 'hts_plugin_split_notice_hidden' );
+
+        if ( $plugin_split_notice_hidden !== false ) {
+            return false;
+        }
+
+        if ( ! version_compare( HOSTINGER_VERSION, '3.0.0', '>=' ) ) {
+            return false;
+        }
+
+        if ( is_plugin_active( 'hostinger-easy-onboarding/hostinger-easy-onboarding.php' ) ) {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 $hostinger_helper = new Helper();

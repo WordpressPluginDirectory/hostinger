@@ -51,7 +51,7 @@ defineProps<Props>();
       class="h-mt-20"
       iconAppend="icon-launch-light"
       @click="actionButton?.onClick"
-      v-if="buttonShown"
+      v-if="buttonShown && actionButton?.text"
       >{{ actionButton.text }}</Button
     >
     <p v-else

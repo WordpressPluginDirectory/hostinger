@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Hostinger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 08:18+0000\n"
-"PO-Revision-Date: 2024-07-24 06:47+0000\n"
+"PO-Revision-Date: 2024-07-31 08:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -12,15 +12,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.7; wp-6.4.4\n"
+"X-Loco-Version: 2.6.10; wp-6.4.5\n"
 "X-Domain: hostinger"
 
-#: includes/Admin/Assets.php:137
+#: includes/Admin/Assets.php:140
 msgid ""
 " Turning on XML-RPC might make your site less secure. Do you want to proceed?"
 msgstr ""
-" L'activation de XML-RPC peut rendre votre site moins sécurisé. Voulez-vous "
-"continuer ?"
+" L’activation de XML-RPC peut rendre votre site moins sécurisé. Voulez-vous "
+"continuer ?"
 
 #: includes/Errors.php:16
 msgid "Action Failed. Try again or contact support. Apologies."
@@ -29,24 +29,23 @@ msgstr "Action échouée. Réessayez ou contactez le support. Toutes nos excuses
 #: includes/Errors.php:19
 msgid "An unexpected error occurred. Please try again or contact support."
 msgstr ""
-"Une erreur inattendue s'est produite. Veuillez réessayer ou contacter "
-"l'assistance."
+"Une erreur inattendue s’est produite. Veuillez réessayer ou contacter "
+"l’assistance."
 
 #. translators: %s: PHP version
 #: hostinger.php:84
-#, fuzzy
 msgid "Attention:"
-msgstr "Attention :"
+msgstr "Attention :"
 
 #: includes/Admin/Assets.php:136
 msgid "Bypass link"
 msgstr "Lien de dérivation"
 
-#: includes/Admin/Assets.php:141
+#: includes/Admin/Assets.php:144
 msgid "Bypass link reset"
 msgstr "Réinitialisation du lien de dérivation"
 
-#: includes/Admin/Assets.php:139 includes/Admin/Assets.php:143
+#: includes/Admin/Assets.php:142 includes/Admin/Assets.php:146
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -66,7 +65,7 @@ msgstr ""
 msgid "Disable XML-RPC"
 msgstr "Désactiver XML-RPC"
 
-#: includes/Admin/Assets.php:138
+#: includes/Admin/Assets.php:141
 msgid "Disclaimer"
 msgstr "Clause de non-responsabilité"
 
@@ -77,38 +76,44 @@ msgstr ""
 "WordPress"
 
 #: includes/Admin/Assets.php:119
-#, fuzzy
 #| msgid "Force HTTPs"
 msgid "Force HTTPS"
-msgstr "Forcer HTTPs"
+msgstr "Forcer HTTPS"
 
 #: includes/Admin/Assets.php:121
 msgid "Force WWW"
 msgstr "Forcer WWW"
 
-#: includes/Admin/Hooks.php:57
-#, fuzzy
+#: includes/Admin/Assets.php:139 includes/Admin/Hooks.php:54
 msgid "Got it"
-msgstr "Je l'ai"
+msgstr "J'ai compris"
 
 #. Author of the plugin
 msgid "Hostinger"
 msgstr "Hostinger"
 
-#: includes/Admin/Hooks.php:55
-#, fuzzy
+#: includes/Admin/Hooks.php:52
 msgid "Hostinger Easy Onboarding"
-msgstr "Hostinger Easy Onboarding"
+msgstr "Démarrage facile Hostinger"
 
-#: includes/Admin/Hooks.php:51
-#, fuzzy
+#: includes/Admin/Hooks.php:48
 msgid "Hostinger plugin updates"
-msgstr "Mises à jour du plugin Hostinger"
+msgstr "Mises à jour de l'extension Hostinger"
 
 #. Plugin Name of the plugin
-#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:54
+#: includes/Admin/Assets.php:113 includes/Admin/Hooks.php:51
 msgid "Hostinger Tools"
 msgstr "Outils Hostinger"
+
+#: includes/Admin/Assets.php:138
+msgid ""
+"Hostinger Tools will offer new tools to simplify your site management. And "
+"Hostinger Easy Onboarding will guide you through the steps of building a "
+"website."
+msgstr ""
+"Hostinger Tools proposera de nouveaux outils pour simplifier la gestion de "
+"votre site. Et Hostinger Easy Onboarding vous guidera à travers les étapes "
+"de la création d’un site web."
 
 #. Description of the plugin
 msgid "Hostinger WordPress plugin."
@@ -124,11 +129,10 @@ msgid "https://www.hostinger.com"
 msgstr "https://www.hostinger.fr"
 
 #: includes/Admin/Assets.php:129
-#, fuzzy
 msgid "is recommended"
 msgstr "est recommandé"
 
-#: includes/Admin/Assets.php:145
+#: includes/Admin/Assets.php:148
 msgid "Link has been reset"
 msgstr "Le lien a été réinitialisé"
 
@@ -146,10 +150,9 @@ msgstr ""
 "Un nouveau site web WordPress est en cours de construction et sera bientôt "
 "publié\n"
 
-#: includes/Admin/Hooks.php:54
-#, fuzzy
+#: includes/Admin/Hooks.php:51
 msgid "offers a toolkit for easier site maintenance."
-msgstr "offre une boîte à outils pour faciliter la maintenance du site."
+msgstr "offre différents outils pour simplifier la maintenance de votre site."
 
 #: includes/Admin/Views/Partials/RateUs.php:38
 #| msgid ""
@@ -174,18 +177,17 @@ msgstr "Version PHP"
 msgid "Preview my website"
 msgstr "Prévisualiser mon site"
 
-#: includes/Admin/Assets.php:140
+#: includes/Admin/Assets.php:143
 msgid "Proceed anyway"
 msgstr "Procéder quand même"
 
-#: includes/Admin/Hooks.php:55
-#, fuzzy
+#: includes/Admin/Hooks.php:52
 msgid ""
 "provides guidance and learning resources for beginners to get started with "
 "building a site using WordPress."
 msgstr ""
-"fournit des conseils et des ressources d'apprentissage pour les débutants "
-"afin qu'ils puissent commencer à créer un site avec WordPress."
+"fournit des conseils et des ressources pour les débutants afin qu'ils "
+"puissent commencer à créer un site avec WordPress."
 
 #: includes/Admin/Views/Partials/RateUs.php:2
 msgid "Rate this plugin"
@@ -203,7 +205,7 @@ msgstr "Redirection de toutes les URL HTTP vers des sites HTTPS"
 msgid "Redirects all WWW URLs to non-WWW ones"
 msgstr "Redirection de tous les URL WWW vers des URL non WWW"
 
-#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:144
+#: includes/Admin/Assets.php:116 includes/Admin/Assets.php:147
 msgid "Reset link"
 msgstr "Réinitialiser le lien"
 
@@ -219,20 +221,17 @@ msgstr "Sécurité "
 msgid "Skip-link that bypasses the maintenance mode"
 msgstr "Lien de saut qui permet de contourner le mode de maintenance "
 
-#: includes/Admin/Hooks.php:52
-#, fuzzy
+#: includes/Admin/Hooks.php:49
 msgid "The Hostinger plugin has been split into two different plugins:"
-msgstr "Le plugin Hostinger a été scindé en deux plugins différents :"
+msgstr "L'extension Hostinger a été divisée en deux extensions différentes :"
 
 #. translators: %s: PHP version
 #: hostinger.php:84
-#, fuzzy
 #| msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>. "
 msgid "The Hostinger plugin requires minimum PHP version of <b>%s</b>."
-msgstr ""
-"Le plugin Hostinger nécessite une version minimale de PHP de <b>%s</b>."
+msgstr "L'extension Hostinger nécessite au minimum la version PHP <b>%s</b>."
 
-#: includes/Admin/Assets.php:142
+#: includes/Admin/Assets.php:145
 msgid ""
 "This will invalidate the currently generated link in use. This action cannot "
 "be undone, are you sure you want to proceed?"
@@ -242,7 +241,6 @@ msgstr ""
 
 #: includes/Admin/Menu.php:22 includes/Admin/Menu.php:31
 #: includes/Admin/Menu.php:32
-#, fuzzy
 msgid "Tools"
 msgstr "Outils"
 
@@ -271,6 +269,14 @@ msgstr ""
 "plus tard, et si le problème persiste, veuillez contacter notre équipe de "
 "support pour plus d'assistance."
 
+#: includes/Admin/Assets.php:137
+msgid ""
+"We’re splitting Hostinger plugin into two: Hostinger Tools and Hostinger "
+"Easy Onboarding"
+msgstr ""
+"Nous séparons l’extension Hostinger en deux : Hostinger Tools et Hostinger "
+"Easy Onboarding."
+
 #: includes/Admin/Assets.php:125
 msgid "WordPress version"
 msgstr "Version de WordPress "
@@ -294,6 +300,5 @@ msgstr ""
 
 #. translators: %s: PHP version
 #: hostinger.php:88
-#, fuzzy
 msgid "You are running <b>%s</b> PHP version."
-msgstr "Vous utilisez <b>%s</b> version PHP."
+msgstr "Vous utilisez la version PHP <b>%s</b>."
