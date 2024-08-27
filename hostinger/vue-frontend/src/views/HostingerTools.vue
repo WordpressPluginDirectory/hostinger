@@ -114,7 +114,7 @@ const isPhpUpdateDisplayed = computed(() => {
 
   return isNewerVerison({
     currentVersion: settingsData.value.phpVersion,
-    newVersion: "8.1", // Hardcoded for now
+    newVersion: "8.2", // Hardcoded for now
   });
 });
 
@@ -124,10 +124,10 @@ const isHostingerPlatform = computed(() => {
 
 const phpVersionCardText = computed(() => {
     if( !isHostingerPlatform.value ) {
-        return `${translate("hostinger_tools_update_to")} 8.1 ${translate("hostinger_tools_update_to_recommended")}`;
+        return `${translate("hostinger_tools_update_to")} 8.2 ${translate("hostinger_tools_update_to_recommended")}`;
     }
 
-    return `${translate("hostinger_tools_update_to")} 8.1`;
+    return `${translate("hostinger_tools_update_to")} 8.2`;
 });
 
 const phpVersionCard = computed(() => ({

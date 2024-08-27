@@ -230,3 +230,6 @@ Fixed
 
 3.0.7 (2024-07-31)
 - Added plugin split notice to plugin UI
+
+3.0.8 (2024-08-27)
+- Updated recommended PHP version

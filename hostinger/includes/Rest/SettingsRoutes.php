@@ -45,7 +45,7 @@ class SettingsRoutes {
 			'newest_wp_version'        => $this->get_latest_wordpress_version(),
 			'current_wp_version'       => $wp_version,
 			'php_version'              => phpversion(),
-			'newest_php_version'       => '8.1', // Will be refactored.
+			'newest_php_version'       => '8.2', // Will be refactored.
 			'is_eligible_www_redirect' => $this->is_eligible_www_redirect(),
 		);
 
