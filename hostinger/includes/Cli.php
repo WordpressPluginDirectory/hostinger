@@ -20,7 +20,8 @@ class Cli {
 	 * @return void
 	 */
 	private function hooks(): void {
-		if ( class_exists( '\WP_CLI' ) ) {
+
+		if ( class_exists( '\WP_CLI' ) && class_exists( '\Hostinger\Cli\Commands\Maintenance' ) ) {
 			WP_CLI::add_hook( 'after_wp_load', array( 'Hostinger\Cli\Commands\Maintenance', 'define_command' ) );
 		}
 	}
