@@ -78,12 +78,15 @@ class Menus
     }
 
     /**
-     * @param string $classes
+     * @param mixed $classes
      *
-     * @return string
+     * @return mixed
      */
-    public function addMenuClass(string $classes): string
+    public function addMenuClass(mixed $classes): mixed
     {
+
+        if (!is_string( $classes)) return $classes;
+
         $classes .= ' hostinger-hide-main-menu-item';
 
         if (!empty(self::isSubmenuItemsHidden())) {

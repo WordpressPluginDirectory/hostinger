@@ -236,3 +236,6 @@ Fixed
 
 3.0.9 (2024-08-04)
 - Added conditional check for maintenance class CLI
+
+3.0.10 (2024-0-11)
+- Update packages
