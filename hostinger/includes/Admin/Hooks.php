@@ -23,6 +23,7 @@ class Hooks {
 		$this->utils  = $utils ?? new Utils();
 		add_action( 'admin_footer', array( $this, 'rate_plugin' ) );
 		add_action( 'admin_init', array( $this, 'message_about_plugin_split' ) );
+        add_filter( 'wp_kses_allowed_html', array( $this, 'custom_kses_allowed_html' ), 10, 1 );
 	}
 
 	/**
@@ -56,4 +57,23 @@ class Hooks {
 		<?php
 		wp_nonce_field( 'hts_close_plugin_split', 'hts_close_plugin_split_nonce', true );
 	}
+
+    public function custom_kses_allowed_html( $allowed ) {
+        // Add SVG elements and attributes to the allowed list
+        $allowed['svg'] = array(
+            'xmlns' => true,
+            'width' => true,
+            'height' => true,
+            'viewBox' => true,
+            'fill' => true,
+            'style' => true,
+            'class' => true,
+        );
+        $allowed['path'] = array(
+            'd' => true,
+            'fill' => true,
+        );
+
+        return $allowed;
+    }
 }
