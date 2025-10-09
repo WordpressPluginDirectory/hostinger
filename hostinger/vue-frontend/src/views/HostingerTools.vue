@@ -141,7 +141,7 @@ const llmsSection = computed(() => {
 			description: translate("hostinger_tools_llms_txt_description"),
 			isVisible: true,
 			toggleValue: settingsData.value?.enableLlmsTxt,
-			learnMoreLink: "https://llmstxt.org/",
+			learnMoreLink: "https://www.hostinger.com/support/how-to-enable-llms-txt-on-your-website/",
 			sideButtons: [
 				{
 					id: "hostinger_tools_llms_txt_llmstxt",

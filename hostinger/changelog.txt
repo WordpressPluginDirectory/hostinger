@@ -483,3 +483,7 @@ Changelog
 - Fix:  Settings route
 - Dev: Fix release updater
 - Tweak: Bump dependencies
+
+3.0.53 (2025-10-09)
+
+- Feature: Learn more destination link changed in LLMS section
