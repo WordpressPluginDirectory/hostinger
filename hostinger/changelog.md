@@ -489,3 +489,8 @@ Changelog
 3.0.53 (2025-10-09)
 
 - Feature: Learn more destination link changed in LLMS section
+
+3.0.54 (2025-11-20)
+
+- Feature: Update readme
+- Fix: Security issue
