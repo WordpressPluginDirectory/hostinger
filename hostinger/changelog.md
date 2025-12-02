@@ -494,3 +494,9 @@ Changelog
 
 - Feature: Update readme
 - Fix: Security issue
+
+3.0.55 (2025-12-02)
+
+- Feature: Bump up WP Tested up to Flag
+- Dev: Add code automation workflow
+- Dev: Bump up package versions

@@ -1,9 +1,9 @@
 === Hostinger Tools ===
 Tags: hostinger, tools, maintenance, security, https
 Requires at least: 5.5
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 8.0
-Stable tag: 3.0.54
+Stable tag: 3.0.55
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Simplified WordPress management. Manage site info, maintenance, security, & redirects.
@@ -601,3 +601,9 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 
 - Feature: Update readme
 - Fix: Security issue
+
+3.0.55 (2025-12-02)
+
+- Feature: Bump up WP Tested up to Flag
+- Dev: Add code automation workflow
+- Dev: Bump up package versions
